@@ -30,7 +30,7 @@ const items = [
         <li>
           <a
             href={item.href}
-            class="label text-ink transition-colors duration-200 hover:text-vermilion"
+            class="label tap text-ink transition-colors duration-200 hover:text-vermilion"
           >
             {item.label}
           </a>
@@ -42,7 +42,7 @@ const items = [
     href={altPath(lang, slug)}
     hreflang={lang === 'zh' ? 'en' : 'zh-CN'}
     aria-label={t.langSwitchLabel}
-    class="label text-muted transition-colors duration-200 hover:text-vermilion"
+    class="label tap text-muted transition-colors duration-200 hover:text-vermilion"
   >
     <span class={lang === 'zh' ? 'text-ink' : ''}>中</span>
     <span aria-hidden="true"> / </span>

@@ -60,7 +60,7 @@ const shelfRatio = { reading: '2 / 3', watching: '2 / 3', listening: '1 / 1' } a
       >
         {profile.tagline[lang]}
       </p>
-      <p class={`${prose} mt-6 max-w-[42ch] text-[0.95rem] text-ink/85`}>
+      <p class={`${prose} mt-6 max-w-[42ch] text-base text-ink/85 md:text-[0.95rem]`}>
         {profile.intro[lang]}
       </p>
     </div>
@@ -74,7 +74,7 @@ const shelfRatio = { reading: '2 / 3', watching: '2 / 3', listening: '1 / 1' } a
                 href={l.href}
                 rel="me noopener"
                 target={l.href.startsWith('mailto:') ? undefined : '_blank'}
-                class="label group inline-flex items-center gap-1.5 transition-colors duration-200 hover:text-vermilion"
+                class="label tap group inline-flex items-center gap-1.5 transition-colors duration-200 hover:text-vermilion"
               >
                 {l.label}
                 <span
@@ -110,7 +110,9 @@ const shelfRatio = { reading: '2 / 3', watching: '2 / 3', listening: '1 / 1' } a
               >
                 {item.title[lang]}
               </h3>
-              <p class={`${prose} text-[0.9rem] text-muted md:col-span-4`}>{item.summary[lang]}</p>
+              <p class={`${prose} text-base text-muted md:col-span-4 md:text-[0.9rem]`}>
+                {item.summary[lang]}
+              </p>
               <span
                 aria-hidden="true"
                 class="text-vermilion transition-transform duration-200 group-hover:translate-x-1 md:col-span-1 md:justify-self-end md:pt-1"
@@ -149,7 +151,9 @@ const shelfRatio = { reading: '2 / 3', watching: '2 / 3', listening: '1 / 1' } a
               >
                 {note.title[lang]}
               </h3>
-              <p class={`${prose} mt-2 text-[0.875rem] text-muted`}>{note.caption[lang]}</p>
+              <p class={`${prose} mt-2 text-base text-muted md:text-[0.875rem]`}>
+                {note.caption[lang]}
+              </p>
             </a>
           </li>
         ))
@@ -168,7 +172,7 @@ const shelfRatio = { reading: '2 / 3', watching: '2 / 3', listening: '1 / 1' } a
               <h3 class={`${headingFont} text-[1.5rem] tracking-tight`}>{t.shelf[shelf]}</h3>
               <a
                 href={path(lang, shelf)}
-                class="label group inline-flex items-center gap-1.5 text-muted transition-colors duration-200 hover:text-vermilion"
+                class="label tap group inline-flex items-center gap-1.5 text-muted transition-colors duration-200 hover:text-vermilion"
               >
                 {t.viewAll}
                 <span

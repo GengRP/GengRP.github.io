@@ -54,6 +54,19 @@
     border-top: 1px solid var(--color-ink);
   }
 
+  /*
+   * Small caps links are 11px tall — fine to click, impossible to tap.
+   * Grow the hit area to 44px on touch devices only, so the desktop
+   * composition keeps its tight vertical rhythm.
+   */
+  @media (pointer: coarse) {
+    .tap {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+  }
+
   .rule-hair {
     border-top: 1px solid var(--color-rule);
   }

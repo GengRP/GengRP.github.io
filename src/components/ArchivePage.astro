@@ -38,10 +38,12 @@ const ratio = shelf === 'listening' ? '1 / 1' : '2 / 3';
       {t.shelf[shelf]}
     </h1>
     <div class="rule mt-6 flex flex-col gap-3 pt-4 sm:flex-row sm:items-baseline sm:justify-between">
-      <p class={`${prose} max-w-[46ch] text-[0.95rem] text-muted`}>{t.shelfLead[shelf]}</p>
+      <p class={`${prose} max-w-[46ch] text-base text-muted md:text-[0.95rem]`}>
+        {t.shelfLead[shelf]}
+      </p>
       <a
         href={path(lang)}
-        class="label group inline-flex items-center gap-1.5 text-muted transition-colors duration-200 hover:text-vermilion"
+        class="label tap group inline-flex items-center gap-1.5 text-muted transition-colors duration-200 hover:text-vermilion"
       >
         <span
           aria-hidden="true"
