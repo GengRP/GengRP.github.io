@@ -1,0 +1,11 @@
+---
+import Base from '../../layouts/Base.astro';
+import HomePage from '../../components/HomePage.astro';
+import site from '../../content/site.json';
+
+const lang = 'en' as const;
+---
+
+<Base lang={lang} title={site.profile.nameLatin} description={site.profile.intro[lang]}>
+  <HomePage lang={lang} />
+</Base>

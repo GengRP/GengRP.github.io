@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import HomePage from '../components/HomePage.astro';
+import site from '../content/site.json';
+
+const lang = 'zh' as const;
+---
+
+<Base
+  lang={lang}
+  title={`${site.profile.nameCn} · ${site.profile.nameLatin}`}
+  description={site.profile.intro[lang]}
+>
+  <HomePage lang={lang} />
+</Base>

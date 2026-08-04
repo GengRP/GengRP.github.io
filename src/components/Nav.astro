@@ -1,0 +1,52 @@
+---
+import { ui, path, altPath, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  /** Current page slug, '' for home. Used to keep the language toggle in place. */
+  slug?: string;
+}
+
+const { lang, slug = '' } = Astro.props;
+const t = ui[lang];
+const home = path(lang);
+
+const items = [
+  { label: t.nav.work, href: `${home}#work` },
+  { label: t.nav.notes, href: `${home}#notes` },
+  { label: t.nav.reading, href: path(lang, 'reading') },
+  { label: t.nav.watching, href: path(lang, 'watching') },
+  { label: t.nav.listening, href: path(lang, 'listening') },
+];
+---
+
+<nav
+  aria-label={lang === 'zh' ? '主导航' : 'Primary'}
+  class="mx-auto flex max-w-[1240px] flex-wrap items-center justify-between gap-x-6 gap-y-3 px-5 pt-6 pb-3 sm:px-8 lg:px-12"
+>
+  <ul class="flex flex-wrap items-center gap-x-6 gap-y-2 sm:gap-x-9">
+    {
+      items.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="label text-ink transition-colors duration-200 hover:text-vermilion"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <a
+    href={altPath(lang, slug)}
+    hreflang={lang === 'zh' ? 'en' : 'zh-CN'}
+    aria-label={t.langSwitchLabel}
+    class="label text-muted transition-colors duration-200 hover:text-vermilion"
+  >
+    <span class={lang === 'zh' ? 'text-ink' : ''}>中</span>
+    <span aria-hidden="true"> / </span>
+    <span class={lang === 'en' ? 'text-ink' : ''}>EN</span>
+  </a>
+</nav>
+<div class="mx-auto max-w-[1240px] px-5 sm:px-8 lg:px-12"><div class="rule"></div></div>

@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #111111;
+  --color-paper: #f6f1e7;
+  --color-paper-lt: #fbfaf7;
+  --color-vermilion: #c8501e;
+  --color-muted: #6b675e;
+  --color-rule: #d8d2c4;
+  --color-tint: #e7e3da;
+
+  --font-display: "Libre Bodoni", "Noto Serif SC", Georgia, serif;
+  --font-sans: "Public Sans", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
+  --font-serif-cn: "Noto Serif SC", "Noto Serif JP", "Libre Bodoni", serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--color-vermilion);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Small letterspaced caps — the magazine's connective tissue. */
+  .label {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .rule {
+    border-top: 1px solid var(--color-ink);
+  }
+
+  .rule-hair {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  /* Body copy tuned per script: Chinese wants looser leading. */
+  .prose-cn {
+    font-family: var(--font-serif-cn);
+    font-weight: 300;
+    line-height: 1.95;
+  }
+
+  .prose-en {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    line-height: 1.75;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

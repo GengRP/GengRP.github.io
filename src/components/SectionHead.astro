@@ -1,0 +1,37 @@
+---
+interface Props {
+  index: string;
+  title: string;
+  id?: string;
+  /** Optional right-hand link, e.g. "View all". */
+  linkLabel?: string;
+  linkHref?: string;
+}
+
+const { index, title, id, linkLabel, linkHref } = Astro.props;
+---
+
+<div id={id} class="rule scroll-mt-8 pt-3">
+  <div class="flex items-baseline justify-between gap-6">
+    <h2 class="label flex items-baseline gap-3">
+      <span class="text-vermilion">{index}</span>
+      <span>{title}</span>
+    </h2>
+    {
+      linkHref && (
+        <a
+          href={linkHref}
+          class="label group inline-flex items-center gap-1.5 text-muted transition-colors duration-200 hover:text-vermilion"
+        >
+          {linkLabel}
+          <span
+            aria-hidden="true"
+            class="inline-block transition-transform duration-200 group-hover:translate-x-0.5"
+          >
+            →
+          </span>
+        </a>
+      )
+    }
+  </div>
+</div>

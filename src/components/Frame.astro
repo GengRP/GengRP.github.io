@@ -1,0 +1,54 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+
+/**
+ * A photo slot. Renders the image when there is one, and an honest,
+ * typeset placeholder when there isn't — never a broken img.
+ */
+interface Props {
+  src?: string;
+  alt?: string;
+  /** Aspect ratio as a CSS value, e.g. "3 / 2". Ignored when ratioClass is set. */
+  ratio?: string;
+  /** Responsive alternative, e.g. "aspect-[4/5] md:aspect-[2/3]". */
+  ratioClass?: string;
+  lang: Lang;
+  label?: string;
+  class?: string;
+}
+
+const {
+  src,
+  alt = '',
+  ratio = '3 / 2',
+  ratioClass,
+  lang,
+  label,
+  class: klass = '',
+} = Astro.props;
+const t = ui[lang];
+const style = ratioClass ? undefined : `aspect-ratio: ${ratio}`;
+const box = `${ratioClass ?? ''} ${klass}`;
+---
+
+{
+  src ? (
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+      class={`w-full object-cover ${box}`}
+      style={style}
+    />
+  ) : (
+    <div
+      class={`flex w-full items-center justify-center bg-tint ${box}`}
+      style={style}
+      role="img"
+      aria-label={alt || t.placeholder}
+    >
+      <span class="label text-muted/70">{label ?? t.placeholder}</span>
+    </div>
+  )
+}

@@ -1,0 +1,127 @@
+{
+  "profile": {
+    "nameLatin": "GENGPING",
+    "nameCn": "耿 平",
+    "nameJa": "コウ　ヘイ",
+    "tagline": {
+      "zh": "声音、空间，以及那些学会倾听的机器。",
+      "en": "Sound, space, and the machines that learn to listen."
+    },
+    "intro": {
+      "zh": "空间音频研究者。近年在做声场重建、「声随人动」渲染，以及一支会自己读财报的 AI 智能体。这里放我的工作、近况，还有在读、在看、在听的东西。",
+      "en": "I work on spatial audio — sound field reconstruction, listener-adaptive rendering — and, lately, a team of AI agents that reads financial filings on its own. This page holds my work, my notes, and whatever I'm reading, watching, and listening to."
+    },
+    "portrait": {
+      "src": "",
+      "alt": { "zh": "人像照片", "en": "Portrait photograph" }
+    },
+    "links": [
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/" },
+      { "label": "小红书", "href": "https://www.xiaohongshu.com/" },
+      { "label": "Instagram", "href": "https://www.instagram.com/" },
+      { "label": "Email", "href": "mailto:gengping0912@gmail.com" }
+    ]
+  },
+
+  "work": [
+    {
+      "year": "2026",
+      "title": { "zh": "声随人动：听者自适应的空间音频渲染", "en": "Listener-adaptive spatial audio rendering" },
+      "summary": {
+        "zh": "让声场跟随听者的位置与朝向实时重建，而不是把人钉在甜点上。",
+        "en": "Reconstructing the sound field around a moving listener in real time, instead of pinning them to the sweet spot."
+      },
+      "href": "https://www.linkedin.com/"
+    },
+    {
+      "year": "2026",
+      "title": { "zh": "金融分析智能体团队", "en": "A team of financial analyst agents" },
+      "summary": {
+        "zh": "多个智能体分工完成晨报：抓数据、读研报、交叉验证、写成一页。",
+        "en": "Agents that split the morning brief between them — pull data, read filings, cross-check, write it up."
+      },
+      "href": "https://www.linkedin.com/"
+    },
+    {
+      "year": "2025",
+      "title": { "zh": "扬声器阵列优化", "en": "Loudspeaker array optimisation" },
+      "summary": {
+        "zh": "在有限阵元下求解指向性与音染之间的取舍。",
+        "en": "Trading directivity against colouration when the array is smaller than the physics would like."
+      },
+      "href": "https://www.linkedin.com/"
+    },
+    {
+      "year": "2025",
+      "title": { "zh": "专利：声学与光学方向若干", "en": "Patents in acoustics and optics" },
+      "summary": {
+        "zh": "从工程实践里挖出来的可保护点，已提交多项。",
+        "en": "Protectable ideas mined out of engineering practice; several filed."
+      },
+      "href": "https://www.linkedin.com/"
+    }
+  ],
+
+  "notes": [
+    {
+      "date": "2026.07",
+      "title": { "zh": "在东京听了一场无扩声的现场", "en": "An unamplified concert in Tokyo" },
+      "caption": {
+        "zh": "厅堂本身就是最好的混响器。回来后改了一版早期反射的参数。",
+        "en": "The hall was the best reverb in the room. Came back and rewrote the early-reflection parameters."
+      },
+      "image": { "src": "", "alt": { "zh": "音乐厅现场", "en": "Inside the concert hall" } },
+      "href": "https://www.xiaohongshu.com/",
+      "source": "小红书"
+    },
+    {
+      "date": "2026.06",
+      "title": { "zh": "实验室的一个下午", "en": "An afternoon in the lab" },
+      "caption": {
+        "zh": "三十二只麦克风围成一圈，量了一整天的房间响应。",
+        "en": "Thirty-two microphones in a ring, a whole day of room responses."
+      },
+      "image": { "src": "", "alt": { "zh": "麦克风阵列", "en": "Microphone array" } },
+      "href": "https://www.instagram.com/",
+      "source": "Instagram"
+    },
+    {
+      "date": "2026.05",
+      "title": { "zh": "和大久保教授的一次长谈", "en": "A long conversation with Prof. Okubo" },
+      "caption": {
+        "zh": "关于合作提案，也关于一个研究者该在什么年纪换题目。",
+        "en": "About the collaboration, and about when a researcher ought to change subjects."
+      },
+      "image": { "src": "", "alt": { "zh": "会谈现场", "en": "The meeting" } },
+      "href": "https://www.xiaohongshu.com/",
+      "source": "小红书"
+    }
+  ],
+
+  "library": {
+    "reading": [
+      { "title": { "zh": "声音的结构", "en": "The Structure of Sound" }, "meta": { "zh": "在读", "en": "Reading" }, "cover": { "src": "" }, "href": "" },
+      { "title": { "zh": "空间与场所", "en": "Space and Place" }, "meta": { "zh": "在读", "en": "Reading" }, "cover": { "src": "" }, "href": "" },
+      { "title": { "zh": "设计的设计", "en": "Designing Design" }, "meta": { "zh": "读完 2026.06", "en": "Finished 2026.06" }, "cover": { "src": "" }, "href": "" },
+      { "title": { "zh": "深度工作", "en": "Deep Work" }, "meta": { "zh": "读完 2026.05", "en": "Finished 2026.05" }, "cover": { "src": "" }, "href": "" },
+      { "title": { "zh": "东京百年史", "en": "Tokyo: A Century" }, "meta": { "zh": "读完 2026.03", "en": "Finished 2026.03" }, "cover": { "src": "" }, "href": "" },
+      { "title": { "zh": "物理学的进化", "en": "The Evolution of Physics" }, "meta": { "zh": "读完 2026.01", "en": "Finished 2026.01" }, "cover": { "src": "" }, "href": "" }
+    ],
+    "watching": [
+      { "title": { "zh": "花样年华", "en": "In the Mood for Love" }, "meta": { "zh": "重看", "en": "Rewatch" }, "cover": { "src": "" }, "href": "" },
+      { "title": { "zh": "细细的红线", "en": "The Thin Red Line" }, "meta": { "zh": "2026.07", "en": "2026.07" }, "cover": { "src": "" }, "href": "" },
+      { "title": { "zh": "海边的曼彻斯特", "en": "Manchester by the Sea" }, "meta": { "zh": "2026.06", "en": "2026.06" }, "cover": { "src": "" }, "href": "" },
+      { "title": { "zh": "东京物语", "en": "Tokyo Story" }, "meta": { "zh": "2026.05", "en": "2026.05" }, "cover": { "src": "" }, "href": "" },
+      { "title": { "zh": "潜行者", "en": "Stalker" }, "meta": { "zh": "2026.03", "en": "2026.03" }, "cover": { "src": "" }, "href": "" },
+      { "title": { "zh": "同流者", "en": "The Conformist" }, "meta": { "zh": "2026.02", "en": "2026.02" }, "cover": { "src": "" }, "href": "" }
+    ],
+    "listening": [
+      { "title": { "zh": "Kind of Blue — Miles Davis", "en": "Kind of Blue — Miles Davis" }, "meta": { "zh": "循环中", "en": "On repeat" }, "cover": { "src": "" }, "href": "" },
+      { "title": { "zh": "Music for Airports — Brian Eno", "en": "Music for Airports — Brian Eno" }, "meta": { "zh": "工作时", "en": "For working" }, "cover": { "src": "" }, "href": "" },
+      { "title": { "zh": "坂本龍一 — async", "en": "Ryuichi Sakamoto — async" }, "meta": { "zh": "2026.07", "en": "2026.07" }, "cover": { "src": "" }, "href": "" },
+      { "title": { "zh": "Blonde — Frank Ocean", "en": "Blonde — Frank Ocean" }, "meta": { "zh": "2026.06", "en": "2026.06" }, "cover": { "src": "" }, "href": "" },
+      { "title": { "zh": "The Köln Concert — Keith Jarrett", "en": "The Köln Concert — Keith Jarrett" }, "meta": { "zh": "2026.05", "en": "2026.05" }, "cover": { "src": "" }, "href": "" },
+      { "title": { "zh": "Talk Memory — BADBADNOTGOOD", "en": "Talk Memory — BADBADNOTGOOD" }, "meta": { "zh": "2026.04", "en": "2026.04" }, "cover": { "src": "" }, "href": "" }
+    ]
+  }
+}

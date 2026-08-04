@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+import { ui, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+}
+
+const { lang, title, description } = Astro.props;
+const t = ui[lang];
+const htmlLang = lang === 'zh' ? 'zh-CN' : 'en';
+---
+
+<!doctype html>
+<html lang={htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="profile" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,500;1,400&family=Public+Sans:wght@300;400;500&family=Noto+Serif+SC:wght@300;400&family=Noto+Serif+JP:wght@300;400&family=Noto+Sans+SC:wght@300;400&display=swap"
+    />
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="label sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-3 focus:text-paper"
+    >
+      {t.skipToContent}
+    </a>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import ArchivePage from '../components/ArchivePage.astro';
+import site from '../content/site.json';
+import { ui, SHELVES, type Shelf } from '../i18n/ui';
+
+export function getStaticPaths() {
+  return SHELVES.map((shelf) => ({ params: { shelf } }));
+}
+
+const lang = 'zh' as const;
+const shelf = Astro.params.shelf as Shelf;
+const t = ui[lang];
+---
+
+<Base
+  lang={lang}
+  title={`${t.shelf[shelf]} · ${site.profile.nameCn}`}
+  description={t.shelfLead[shelf]}
+>
+  <ArchivePage lang={lang} shelf={shelf} />
+</Base>
