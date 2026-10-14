@@ -1,0 +1,185 @@
+{
+  "profile": {
+    "name": "KOUHEI",
+    "tagline": {
+      "zh": "学 AI、用 AI，把过程记下来。",
+      "ja": "AIを学び、AIを使い、その過程を記録する。",
+      "en": "Learning AI, using AI, and writing down how it goes."
+    },
+    "intro": {
+      "zh": "我是 KOUHEI，一名喜欢 AI 的 IT 工程师，工作中帮过不少没有 AI 背景的人上手。这里记录我学 AI、用 AI 的过程，写给听过很多概念、但还没真正用起来的人。",
+      "ja": "KOUHEI です。AI が好きな IT エンジニアで、仕事では AI に詳しくない人が使い始めるのを手伝ってきました。ここでは、自分が AI を学び、使う過程を記録しています。概念は聞いたことがあるけれど、まだ使いこなせていない人に向けて。",
+      "en": "I'm KOUHEI, an IT engineer who likes AI. At work I've helped plenty of people with no AI background get started. This is where I record how I learn and use AI, for people who have heard the concepts but haven't really started yet."
+    }
+  },
+  "elsewhere": [
+    {
+      "label": "X",
+      "handle": "@SuperKOUHEi001",
+      "href": "https://x.com/SuperKOUHEi001",
+      "note": {
+        "zh": "日语，每周两条",
+        "ja": "日本語・週2本",
+        "en": "Japanese, twice a week"
+      }
+    },
+    {
+      "label": "GitHub",
+      "handle": "GengRP",
+      "href": "https://github.com/GengRP",
+      "note": {
+        "zh": "代码和教程",
+        "ja": "コードとガイド",
+        "en": "Code and guides"
+      }
+    },
+    {
+      "label": "LinkedIn",
+      "handle": "ping-geng",
+      "href": "https://www.linkedin.com/in/ping-geng-4a216933a",
+      "note": {
+        "zh": "英语",
+        "ja": "英語",
+        "en": "English"
+      }
+    },
+    {
+      "label": "小红书",
+      "handle": "",
+      "href": "",
+      "note": {
+        "zh": "中文图文",
+        "ja": "中国語・画像投稿",
+        "en": "Chinese, image posts"
+      }
+    },
+    {
+      "label": "Bilibili / YouTube",
+      "handle": "",
+      "href": "",
+      "note": {
+        "zh": "每月一个视频",
+        "ja": "月1本の動画",
+        "en": "One video a month"
+      }
+    },
+    {
+      "label": "Email",
+      "handle": "gengping0912@gmail.com",
+      "href": "mailto:gengping0912@gmail.com",
+      "note": {
+        "zh": "联系",
+        "ja": "連絡",
+        "en": "Contact"
+      }
+    }
+  ],
+  "projects": [
+    {
+      "name": "AI Daily",
+      "title": {
+        "zh": "AI 日报",
+        "ja": "AIデイリー",
+        "en": "AI Daily"
+      },
+      "summary": {
+        "zh": "每天五条 AI 新闻，每条一两句话讲清楚，附一个可以写的角度。中文、日语、英语三语。",
+        "ja": "毎日 AI ニュースを5本、それぞれ一言二言で。日本語・中国語・英語の3言語。",
+        "en": "Five AI news items a day, a sentence or two each, in Chinese, Japanese and English."
+      },
+      "status": {
+        "zh": "每日更新",
+        "ja": "毎日更新",
+        "en": "Updated daily"
+      },
+      "site": "daily",
+      "repo": "https://github.com/GengRP/ai-daily"
+    },
+    {
+      "name": "AI Starter Guide",
+      "title": {
+        "zh": "AI 入门实践指南",
+        "ja": "AI入門実践ガイド",
+        "en": "AI Starter Guide"
+      },
+      "summary": {
+        "zh": "从「跟 AI 聊天」到「让 AI 帮你干活」，每一章都配可以照着做的步骤。",
+        "ja": "「AIとおしゃべり」から「AIに仕事を任せる」へ。各章に、そのまま試せる手順つき。",
+        "en": "From chatting with AI to getting real work done with it, with steps you can follow in every chapter."
+      },
+      "status": {
+        "zh": "写作中",
+        "ja": "執筆中",
+        "en": "In progress"
+      },
+      "site": "",
+      "repo": "https://github.com/GengRP/ai-starter-guide"
+    }
+  ],
+  "about": {
+    "body": {
+      "zh": [
+        "我是 KOUHEI，一名喜欢 AI 的 IT 工程师。",
+        "工作中经常有人问我：AI 到底能帮我做什么？我发现很多人听过不少概念，却一直没有真正用起来。卡住他们的往往不是技术，而是不知道从哪一步开始。",
+        "所以我把自己学 AI、用 AI 的过程记下来：踩过的坑、弄明白的原理、真正省下时间的用法。写的都是我自己试过的事。"
+      ],
+      "ja": [
+        "KOUHEI です。AI が好きな IT エンジニアです。",
+        "仕事でよく「AI で何ができるの？」と聞かれます。概念はたくさん聞いたことがあるのに、実際には使い始めていない人が多い。止まっている理由は技術よりも、最初の一歩が分からないことだと感じています。",
+        "そこで、自分が AI を学び、使う過程を記録することにしました。つまずいたこと、仕組みとして理解できたこと、本当に時間が浮いた使い方。書くのは自分で試したことだけです。"
+      ],
+      "en": [
+        "I'm KOUHEI, an IT engineer who likes AI.",
+        "People at work often ask me what AI can actually do for them. Many have heard plenty of concepts but never really started. What holds them back is usually not the technology, but not knowing where to begin.",
+        "So I write down how I learn and use AI: the mistakes, the things I came to understand, and the uses that genuinely saved me time. I only write about things I have tried myself."
+      ]
+    }
+  },
+  "shelf": {
+    "films": [
+      {
+        "title": {
+          "zh": "JOJO的奇妙冒险 第七部 飙马野郎",
+          "ja": "ジョジョの奇妙な冒険 第7部 スティール・ボール・ラン",
+          "en": "JoJo's Bizarre Adventure: Steel Ball Run"
+        },
+        "meta": {
+          "zh": "在看",
+          "ja": "視聴中",
+          "en": "Watching"
+        },
+        "cover": "/covers/films/jojo-sbr.jpg",
+        "href": ""
+      },
+      {
+        "title": {
+          "zh": "杀死比尔",
+          "ja": "キル・ビル",
+          "en": "Kill Bill"
+        },
+        "meta": {
+          "zh": "在看",
+          "ja": "視聴中",
+          "en": "Watching"
+        },
+        "cover": "/covers/films/kill-bill.png",
+        "href": ""
+      },
+      {
+        "title": {
+          "zh": "瑞克和莫蒂",
+          "ja": "リック・アンド・モーティ",
+          "en": "Rick and Morty"
+        },
+        "meta": {
+          "zh": "在看",
+          "ja": "視聴中",
+          "en": "Watching"
+        },
+        "cover": "/covers/films/rick-and-morty.png",
+        "href": ""
+      }
+    ],
+    "playlist": "https://embed.music.apple.com/cn/playlist/%E6%84%9B/pl.u-06oxDBxFWLdJ7ZB"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "reading": [
+    {
+      "title": "小狗钱钱",
+      "author": "博多·舍费尔",
+      "progress": 1,
+      "cover": "/covers/books/88ec2698a2d9.jpg"
+    },
+    {
+      "title": "围城",
+      "author": "钱钟书",
+      "progress": 20,
+      "cover": "/covers/books/169f8818ddfa.jpeg"
+    }
+  ],
+  "finished": []
+}

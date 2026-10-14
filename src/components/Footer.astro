@@ -1,0 +1,29 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+import site from '../content/site.json';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const live = site.elsewhere.filter((e) => e.href && !e.href.startsWith('mailto:'));
+---
+
+<footer class="border-t border-rule">
+  <div class="mx-auto flex max-w-3xl flex-col gap-3 px-5 py-8 text-sm text-faint sm:flex-row sm:items-center sm:justify-between sm:px-8">
+    {t.footer && <p>{t.footer}</p>}
+    <ul class="flex gap-4">
+      {
+        live.map((e) => (
+          <li>
+            <a href={e.href} class="tap transition-colors duration-200 hover:text-accent" rel="me">
+              {e.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</footer>

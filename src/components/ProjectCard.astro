@@ -1,0 +1,23 @@
+---
+import { ui, DAILY_PATH, type Lang, type Text } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  project: { name: string; title: Text; summary: Text; status: Text; site: string; repo: string };
+}
+const { lang, project } = Astro.props;
+const t = ui[lang];
+const siteHref = project.site === 'daily' ? DAILY_PATH[lang] : project.site;
+---
+
+<article class="rounded-xl border border-rule bg-card p-5 transition-colors duration-200 hover:border-stone-300">
+  <div class="flex items-start justify-between gap-3">
+    <h3 class="font-display text-lg leading-snug font-semibold">{project.title[lang]}</h3>
+    <span class="shrink-0 rounded-full bg-accent-soft px-2.5 py-0.5 text-xs text-accent">{project.status[lang]}</span>
+  </div>
+  <p class="mt-2 text-[0.9375rem] leading-relaxed text-muted">{project.summary[lang]}</p>
+  <div class="mt-3 flex gap-4 text-sm">
+    {siteHref && <a href={siteHref} class="tap link">{t.projects.site} →</a>}
+    {project.repo && <a href={project.repo} class="tap link">{t.projects.repo} →</a>}
+  </div>
+</article>

@@ -1,0 +1,23 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { ui, localePaths, type Lang } from '../../../i18n/ui';
+import site from '../../../content/site.json';
+import SocialCards from '../../../components/SocialCards.astro';
+
+export const getStaticPaths = localePaths;
+
+const { lang } = Astro.props as { lang: Lang };
+const t = ui[lang];
+const { about } = site;
+---
+
+<Base lang={lang} slug="about" title={t.about.title} description={site.profile.intro[lang]}>
+  <h1 class="font-display text-3xl font-bold tracking-tight">{t.about.title}</h1>
+  <div class="prose mt-8">
+    {about.body[lang].map((para) => <p>{para}</p>)}
+  </div>
+  <section class="mt-10">
+    <SocialCards lang={lang} />
+  </section>
+
+</Base>

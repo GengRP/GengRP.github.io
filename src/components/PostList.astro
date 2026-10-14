@@ -1,0 +1,27 @@
+---
+import { path, formatDate, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  posts: { slug: string; data: { title: string; summary: string; date: Date } }[];
+}
+const { lang, posts } = Astro.props;
+---
+
+<ul class="divide-y divide-rule">
+  {
+    posts.map((p) => (
+      <li>
+        <a href={path(lang, `writing/${p.slug}`)} class="group block py-5 cursor-pointer">
+          <time datetime={p.data.date.toISOString()} class="font-mono text-xs text-faint">
+            {formatDate(p.data.date, lang)}
+          </time>
+          <h3 class="mt-1 font-display text-lg leading-snug font-semibold text-ink transition-colors duration-200 group-hover:text-accent">
+            {p.data.title}
+          </h3>
+          <p class="mt-1.5 text-[0.9375rem] leading-relaxed text-muted">{p.data.summary}</p>
+        </a>
+      </li>
+    ))
+  }
+</ul>

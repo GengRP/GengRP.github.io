@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #1c1917;
+  --color-paper: #fafaf9;
+  --color-card: #ffffff;
+  --color-muted: #57534e;
+  --color-faint: #78716c;
+  --color-rule: #e7e5e4;
+  --color-accent: #1d4ed8;
+  --color-accent-soft: #eff6ff;
+
+  --font-display: "Space Grotesk", var(--font-cjk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", var(--font-cjk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* CJK face follows the page language, so Japanese never renders with Chinese glyph shapes. */
+:root { --font-cjk: "Noto Sans SC"; }
+:root:lang(ja) { --font-cjk: "Noto Sans JP"; }
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #fff;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* Small caps-style section label. */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-faint);
+  }
+
+  .link {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 200ms;
+  }
+  .link:hover {
+    text-decoration-color: var(--color-accent);
+  }
+
+  /* Touch devices get 44px hit areas without loosening the desktop rhythm. */
+  @media (pointer: coarse) {
+    .tap {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+  }
+
+  /* Article body. */
+  .prose {
+    font-size: 1.0625rem;
+    line-height: 1.9;
+  }
+  .prose > * + * {
+    margin-top: 1.1em;
+  }
+  .prose h2 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-top: 2.2em;
+  }
+  .prose a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose ul,
+  .prose ol {
+    padding-left: 1.4em;
+  }
+  .prose ul { list-style: disc; }
+  .prose ol { list-style: decimal; }
+  .prose blockquote {
+    border-left: 3px solid var(--color-rule);
+    padding-left: 1em;
+    color: var(--color-muted);
+  }
+  .prose code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--color-rule);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+  }
+  .prose pre {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    padding: 1em 1.2em;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.875rem;
+  }
+  .prose pre code {
+    background: none;
+    padding: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
