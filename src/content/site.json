@@ -143,11 +143,6 @@
           "ja": "ジョジョの奇妙な冒険 第7部 スティール・ボール・ラン",
           "en": "JoJo's Bizarre Adventure: Steel Ball Run"
         },
-        "meta": {
-          "zh": "在看",
-          "ja": "視聴中",
-          "en": "Watching"
-        },
         "cover": "/covers/films/jojo-sbr.jpg",
         "href": ""
       },
@@ -156,11 +151,6 @@
           "zh": "杀死比尔",
           "ja": "キル・ビル",
           "en": "Kill Bill"
-        },
-        "meta": {
-          "zh": "在看",
-          "ja": "視聴中",
-          "en": "Watching"
         },
         "cover": "/covers/films/kill-bill.png",
         "href": ""
@@ -171,11 +161,6 @@
           "ja": "リック・アンド・モーティ",
           "en": "Rick and Morty"
         },
-        "meta": {
-          "zh": "在看",
-          "ja": "視聴中",
-          "en": "Watching"
-        },
         "cover": "/covers/films/rick-and-morty.png",
         "href": ""
       },
@@ -184,11 +169,6 @@
           "zh": "Murderbot",
           "ja": "マーダーボット",
           "en": "Murderbot"
-        },
-        "meta": {
-          "zh": "2026 看过",
-          "ja": "2026年に視聴",
-          "en": "Watched in 2026"
         },
         "cover": "/covers/films/murderbot.jpg",
         "href": ""
@@ -199,11 +179,6 @@
           "ja": "機動戦士ガンダムF91",
           "en": "Mobile Suit Gundam F91"
         },
-        "meta": {
-          "zh": "2026 看过",
-          "ja": "2026年に視聴",
-          "en": "Watched in 2026"
-        },
         "cover": "/covers/films/gundam-f91.jpg",
         "href": ""
       },
@@ -212,11 +187,6 @@
           "zh": "奥德赛",
           "ja": "オデュッセイア",
           "en": "The Odyssey"
-        },
-        "meta": {
-          "zh": "2026 看过",
-          "ja": "2026年に視聴",
-          "en": "Watched in 2026"
         },
         "cover": "/covers/films/the-odyssey.jpg",
         "href": ""

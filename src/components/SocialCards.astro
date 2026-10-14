@@ -35,9 +35,8 @@ const cards = order.map((label) => site.elsewhere.find((e) => e.label === label)
           </div>
           <div>
             <p class="font-medium transition-colors duration-200 group-hover:text-accent">{e!.label}</p>
-            <p class="mt-0.5 hidden font-mono text-xs text-muted break-all sm:block">{e!.handle}</p>
+            <p class="mt-0.5 font-mono text-xs text-muted break-all">{e!.handle}</p>
           </div>
-          <p class="hidden text-sm text-faint sm:block">{e!.note[lang]}</p>
         </a>
       </li>
     ))
