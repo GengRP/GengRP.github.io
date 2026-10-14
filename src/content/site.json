@@ -178,6 +178,48 @@
         },
         "cover": "/covers/films/rick-and-morty.png",
         "href": ""
+      },
+      {
+        "title": {
+          "zh": "Murderbot",
+          "ja": "マーダーボット",
+          "en": "Murderbot"
+        },
+        "meta": {
+          "zh": "2026 看过",
+          "ja": "2026年に視聴",
+          "en": "Watched in 2026"
+        },
+        "cover": "/covers/films/murderbot.jpg",
+        "href": ""
+      },
+      {
+        "title": {
+          "zh": "机动战士高达 F91",
+          "ja": "機動戦士ガンダムF91",
+          "en": "Mobile Suit Gundam F91"
+        },
+        "meta": {
+          "zh": "2026 看过",
+          "ja": "2026年に視聴",
+          "en": "Watched in 2026"
+        },
+        "cover": "/covers/films/gundam-f91.jpg",
+        "href": ""
+      },
+      {
+        "title": {
+          "zh": "奥德赛",
+          "ja": "オデュッセイア",
+          "en": "The Odyssey"
+        },
+        "meta": {
+          "zh": "2026 看过",
+          "ja": "2026年に視聴",
+          "en": "Watched in 2026"
+        },
+        "cover": "/covers/films/the-odyssey.jpg",
+        "href": ""
       }
     ],
     "playlist": "https://embed.music.apple.com/cn/playlist/%E6%84%9B/pl.u-06oxDBxFWLdJ7ZB"
