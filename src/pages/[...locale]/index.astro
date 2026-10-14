@@ -4,7 +4,8 @@ import SectionHead from '../../components/SectionHead.astro';
 import PostList from '../../components/PostList.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import { ui, path, localePaths, DAILY_PATH, type Lang } from '../../i18n/ui';
-import { getPosts } from '../../i18n/posts';
+import { getPosts, getShortPosts } from '../../i18n/posts';
+import PostFeed from '../../components/PostFeed.astro';
 import site from '../../content/site.json';
 
 export const getStaticPaths = localePaths;
@@ -12,6 +13,7 @@ export const getStaticPaths = localePaths;
 const { lang } = Astro.props as { lang: Lang };
 const t = ui[lang];
 const posts = (await getPosts(lang)).slice(0, 3);
+const shortPosts = (await getShortPosts(lang)).slice(0, 2);
 const { profile } = site;
 ---
 
@@ -23,9 +25,18 @@ const { profile } = site;
     <p class="mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-muted">{profile.intro[lang]}</p>
   </section>
 
+  {
+    posts.length > 0 && (
+      <section class="mb-14">
+        <SectionHead title={t.home.latest} href={path(lang, 'writing')} linkLabel={t.home.allWriting} />
+        <PostList lang={lang} posts={posts} />
+      </section>
+    )
+  }
+
   <section class="mb-14">
-    <SectionHead title={t.home.latest} href={path(lang, 'writing')} linkLabel={t.home.allWriting} />
-    <PostList lang={lang} posts={posts} />
+    <SectionHead title={t.home.latestPosts} href={path(lang, 'posts')} linkLabel={t.home.allPosts} />
+    <PostFeed lang={lang} posts={shortPosts} />
   </section>
 
   <section class="mb-14">

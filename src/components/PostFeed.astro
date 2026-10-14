@@ -1,0 +1,42 @@
+---
+import { render } from 'astro:content';
+import { ui, formatDate, type Lang } from '../i18n/ui';
+import type { getShortPosts } from '../i18n/posts';
+
+interface Props {
+  lang: Lang;
+  posts: Awaited<ReturnType<typeof getShortPosts>>;
+}
+const { lang, posts } = Astro.props;
+const t = ui[lang];
+const rendered = await Promise.all(posts.map(async (p) => ({ post: p, Content: (await render(p)).Content })));
+---
+
+<ul class="divide-y divide-rule">
+  {
+    rendered.map(({ post, Content }) => (
+      <li id={post.slug} class="py-6">
+        <p class="flex flex-wrap items-baseline gap-x-3 font-mono text-xs text-faint">
+          <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date, lang)}</time>
+          {post.data.quote && (
+            <span>
+              {t.posts.quoting}{' '}
+              <a href={post.data.quote.href} class="link" rel="noopener" target="_blank">
+                {post.data.quote.label}
+              </a>
+            </span>
+          )}
+        </p>
+        <div class="post-body mt-3">
+          <Content />
+        </div>
+        <p class="mt-4 text-sm">
+          <a href={post.data.x} class="tap link" rel="noopener" target="_blank">
+            {t.posts.view} ↗
+          </a>
+          {t.posts.translated && <span class="ml-2 text-faint">· {t.posts.translated}</span>}
+        </p>
+      </li>
+    ))
+  }
+</ul>

@@ -140,3 +140,22 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Short posts mirrored from X: keep the post's own line breaks, and show thread parts as separate blocks. */
+@layer components {
+  .post-body {
+    font-size: 1.0625rem;
+    line-height: 1.8;
+  }
+  .post-body p {
+    white-space: pre-line;
+  }
+  .post-body > * + * {
+    margin-top: 0.9em;
+  }
+  .post-body hr {
+    margin: 1.25em 0;
+    border: 0;
+    border-top: 1px dashed var(--color-rule);
+  }
+}

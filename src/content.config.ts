@@ -18,4 +18,19 @@ const writing = defineCollection({
   }),
 });
 
-export const collections = { writing };
+/**
+ * Short posts mirrored from X live in src/content/posts/<lang>/<slug>.md.
+ * Thread parts are separated by a horizontal rule (---) in the body.
+ */
+const posts = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/posts' }),
+  schema: z.object({
+    date: z.coerce.date(),
+    /** The original post on X. */
+    x: z.string(),
+    /** The post it quotes, if any. */
+    quote: z.object({ label: z.string(), href: z.string() }).optional(),
+  }),
+});
+
+export const collections = { writing, posts };

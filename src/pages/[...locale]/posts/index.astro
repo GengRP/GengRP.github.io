@@ -1,0 +1,20 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PostFeed from '../../../components/PostFeed.astro';
+import { ui, localePaths, type Lang } from '../../../i18n/ui';
+import { getShortPosts } from '../../../i18n/posts';
+
+export const getStaticPaths = localePaths;
+
+const { lang } = Astro.props as { lang: Lang };
+const t = ui[lang];
+const posts = await getShortPosts(lang);
+---
+
+<Base lang={lang} slug="posts" title={t.posts.title} description={t.posts.lead}>
+  <h1 class="font-display text-3xl font-bold tracking-tight">{t.posts.title}</h1>
+  <p class="mt-3 text-muted">{t.posts.lead}</p>
+  <div class="mt-6">
+    <PostFeed lang={lang} posts={posts} />
+  </div>
+</Base>
