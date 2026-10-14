@@ -11,7 +11,7 @@ export const getStaticPaths = localePaths;
 const { lang } = Astro.props as { lang: Lang };
 const t = ui[lang];
 
-type Book = { title: string; author: string; cover: string; progress?: number; date?: string };
+type Book = { title: string; author: string; cover: string; date?: string };
 const bookGroups: { key: string; title: string; items: Book[] }[] = [
   { key: 'reading', title: t.shelf.reading, items: books.reading },
   { key: 'finished', title: t.shelf.finished, items: books.finished },
@@ -54,21 +54,6 @@ const playlistSrc = `${site.shelf.playlist}?l=${musicLang}`;
                   </div>
                   <p class="mt-2 text-sm leading-snug font-medium break-words">{b.title}</p>
                   {b.author && <p class="mt-0.5 text-xs text-muted break-words">{b.author}</p>}
-                  {b.progress !== undefined && (
-                    <div class="mt-1.5">
-                      <div
-                        class="h-1 overflow-hidden rounded-full bg-stone-200"
-                        role="progressbar"
-                        aria-valuenow={b.progress}
-                        aria-valuemin={0}
-                        aria-valuemax={100}
-                        aria-label={`${t.shelf.progress} ${b.progress}%`}
-                      >
-                        <div class="h-full bg-accent" style={`width:${Math.max(b.progress, 2)}%`} />
-                      </div>
-                      <p class="mt-1 font-mono text-xs text-faint">{t.shelf.progress} {b.progress}%</p>
-                    </div>
-                  )}
                   {b.date && <p class="mt-0.5 font-mono text-xs text-faint">{b.date}</p>}
                 </li>
               ))}
