@@ -38,7 +38,7 @@ export const ui = {
     skip: '跳到正文',
     menu: '主导航',
     langs: '语言',
-    footer: '',
+    footer: '做我想做的事，成为我要成为的人。',
   },
   ja: {
     nav: { writing: '記事', daily: 'AIデイリー', projects: 'プロジェクト', shelf: 'ライブラリ', about: '自己紹介' },
@@ -60,7 +60,7 @@ export const ui = {
     skip: '本文へ移動',
     menu: 'メインナビゲーション',
     langs: '言語',
-    footer: '',
+    footer: 'やりたいことをやり、なりたい自分になる。',
   },
   en: {
     nav: { writing: 'Writing', daily: 'AI Daily', projects: 'Projects', shelf: 'Library', about: 'About' },
@@ -82,7 +82,7 @@ export const ui = {
     skip: 'Skip to content',
     menu: 'Primary',
     langs: 'Language',
-    footer: '',
+    footer: 'Do what I want to do. Become who I mean to be.',
   },
 } as const;
 
