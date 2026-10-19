@@ -1,0 +1,49 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHero from '../../../components/PageHero.astro';
+import { ui, localePaths, type Lang } from '../../../i18n/ui';
+import site from '../../../content/site.json';
+
+export const getStaticPaths = localePaths;
+
+const { lang } = Astro.props as { lang: Lang };
+const t = ui[lang];
+const tools = site.toolbox.flatMap((g) => g.items.map((item) => ({ ...item, group: g.title[lang] })));
+const host = (href: string) => new URL(href).hostname.replace(/^www\./, '');
+---
+
+<Base lang={lang} slug="toolbox" title={t.toolbox.title} description={t.toolbox.lead}>
+  <PageHero title={t.toolbox.title} lead={t.toolbox.lead} />
+
+  <!-- One grid; each card carries its category, so a short list doesn't leave empty sections. -->
+  <section class="band band-shade !pt-12 sm:!pt-16">
+    <ul class="wrap grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        tools.map((tool) => (
+          <li>
+            <a
+              href={tool.href}
+              rel="noopener"
+              target="_blank"
+              class="card group flex h-full cursor-pointer flex-col p-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              <div class="flex items-start justify-between">
+                <img src={tool.icon} alt="" width="48" height="48" loading="lazy" class="h-12 w-12 rounded-xl bg-shade object-contain" />
+                <span class="rounded-full bg-accent-soft px-3 py-1 text-xs font-medium text-accent">{tool.group}</span>
+              </div>
+              <h3 class="mt-5 flex items-center gap-1.5 text-xl font-bold tracking-tight transition-colors duration-200 group-hover:text-accent">
+                {tool.name}
+                <span class="text-base font-normal text-muted transition-colors duration-200 group-hover:text-accent" aria-hidden="true">↗</span>
+              </h3>
+              <p class="mt-2 flex-1 text-[0.9375rem] leading-relaxed text-muted">{tool.desc[lang]}</p>
+              <p class="mt-5 flex flex-wrap gap-x-3 text-[0.8125rem] text-muted">
+                <span>{host(tool.href)}</span>
+                {tool.note && <span>{tool.note[lang]}</span>}
+              </p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>

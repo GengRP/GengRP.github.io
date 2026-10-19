@@ -193,5 +193,55 @@
       }
     ],
     "playlist": "https://embed.music.apple.com/cn/playlist/%E6%84%9B/pl.u-06oxDBxFWLdJ7ZB"
-  }
+  },
+  "toolbox": [
+    {
+      "title": {
+        "zh": "学习",
+        "ja": "学ぶ",
+        "en": "Learn"
+      },
+      "items": [
+        {
+          "name": "VibeHub",
+          "href": "https://vibe-hub.org/",
+          "icon": "/covers/tools/vibe-hub.org.png",
+          "desc": {
+            "zh": "Vibe Coding 术语图鉴：用大白话讲前端、后端、AI 术语，还有设计风格、练习和课程。",
+            "ja": "Vibe Coding の用語図鑑。フロント・バックエンド・AI の用語をやさしい言葉で解説。デザインスタイル集や練習問題もある。",
+            "en": "A plain-language glossary for vibe coding: frontend, backend and AI terms, plus design styles, exercises and courses."
+          },
+          "note": {
+            "zh": "中文",
+            "ja": "中国語",
+            "en": "Chinese"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "zh": "灵感",
+        "ja": "インスピレーション",
+        "en": "Inspiration"
+      },
+      "items": [
+        {
+          "name": "Prompt Motion",
+          "href": "https://www.prompt-motion.com/",
+          "icon": "/covers/tools/www.prompt-motion.com.png",
+          "desc": {
+            "zh": "用 Claude 生成的动效和动画合集，每个作品都附上提示词和 skill，可以直接拿来改。",
+            "ja": "Claude で作ったモーション・アニメーションの作品集。各作品にプロンプトと skill が付いていて、そのまま応用できる。",
+            "en": "A gallery of motion graphics made with Claude. Each piece comes with its prompt and skill, ready to adapt."
+          },
+          "note": {
+            "zh": "英文 · 免费",
+            "ja": "英語・無料",
+            "en": "English · free"
+          }
+        }
+      ]
+    }
+  ]
 }

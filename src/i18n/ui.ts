@@ -19,7 +19,7 @@ export const DAILY_PATH: Record<Lang, string> = {
 
 export const ui = {
   zh: {
-    nav: { writing: '文章', posts: '动态', daily: 'AI 日报', projects: '项目', shelf: '书影音', about: '关于' },
+    nav: { writing: '文章', posts: '动态', daily: 'AI 日报', projects: '项目', toolbox: 'AI 工具箱', shelf: '书影音', about: '关于' },
     home: {
       latest: '最新文章',
       latestPosts: '最新动态',
@@ -36,6 +36,7 @@ export const ui = {
     posts: { title: '动态', lead: '发在 X 上的短帖。', view: '在 X 上看原帖', translated: '译自日语原帖', quoting: '引用' },
     projects: { title: '项目', lead: '公开的仓库和长期在做的东西。', site: '网站', repo: '代码' },
     shelf: { title: '书影音', lead: '在读的书、看过的电影、常听的音乐。', books: '书架', reading: '在读', finished: '读过', progress: '读到', none: '还没有', films: '影集', music: '歌单' },
+    toolbox: { title: 'AI 工具箱', lead: '我收藏、常用的 AI 相关网站。', visit: '打开' },
     about: { title: '关于' },
     soon: '准备中',
     skip: '跳到正文',
@@ -44,7 +45,7 @@ export const ui = {
     footer: '做我想做的事，成为我要成为的人。',
   },
   ja: {
-    nav: { writing: '記事', posts: '投稿', daily: 'AIデイリー', projects: 'プロジェクト', shelf: 'ライブラリ', about: '自己紹介' },
+    nav: { writing: '記事', posts: '投稿', daily: 'AIデイリー', projects: 'プロジェクト', toolbox: 'AIツール箱', shelf: 'ライブラリ', about: '自己紹介' },
     home: {
       latest: '新着記事',
       latestPosts: '新着投稿',
@@ -61,6 +62,7 @@ export const ui = {
     posts: { title: '投稿', lead: 'X に投稿した短い投稿。', view: 'X で見る', translated: '', quoting: '引用' },
     projects: { title: 'プロジェクト', lead: '公開しているリポジトリと、続けているもの。', site: 'サイト', repo: 'コード' },
     shelf: { title: '本・映画・音楽', lead: '読んでいる本、観た映画、よく聴く音楽。', books: '本棚', reading: '読書中', finished: '読了', progress: '進捗', none: 'まだありません', films: '映画', music: 'プレイリスト' },
+    toolbox: { title: 'AIツール箱', lead: '集めている、よく使う AI 関連サイト。', visit: '開く' },
     about: { title: '自己紹介' },
     soon: '準備中',
     skip: '本文へ移動',
@@ -69,7 +71,7 @@ export const ui = {
     footer: 'やりたいことをやり、なりたい自分になる。',
   },
   en: {
-    nav: { writing: 'Writing', posts: 'Posts', daily: 'AI Daily', projects: 'Projects', shelf: 'Library', about: 'About' },
+    nav: { writing: 'Writing', posts: 'Posts', daily: 'AI Daily', projects: 'Projects', toolbox: 'AI Toolbox', shelf: 'Library', about: 'About' },
     home: {
       latest: 'Latest writing',
       latestPosts: 'Latest posts',
@@ -86,6 +88,7 @@ export const ui = {
     posts: { title: 'Posts', lead: 'Short posts from X.', view: 'View on X', translated: 'Translated from the Japanese original', quoting: 'Quoting' },
     projects: { title: 'Projects', lead: 'Public repositories and long-running work.', site: 'Site', repo: 'Code' },
     shelf: { title: 'Library', lead: 'What I am reading, have watched, and keep listening to.', books: 'Bookshelf', reading: 'Reading', finished: 'Finished', progress: 'At', none: 'Nothing yet', films: 'Films', music: 'Playlist' },
+    toolbox: { title: 'AI Toolbox', lead: 'AI-related sites I have collected and keep coming back to.', visit: 'Open' },
     about: { title: 'About' },
     soon: 'Coming soon',
     skip: 'Skip to content',
