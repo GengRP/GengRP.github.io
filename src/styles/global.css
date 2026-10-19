@@ -1,23 +1,30 @@
 @import "tailwindcss";
 
+/* Apple HIG-inspired tokens: neutral greys, one blue, system type. */
 @theme {
-  --color-ink: #1c1917;
-  --color-paper: #fafaf9;
+  --color-ink: #1d1d1f;
+  --color-paper: #ffffff;
+  --color-shade: #f5f5f7;
   --color-card: #ffffff;
-  --color-muted: #57534e;
-  --color-faint: #78716c;
-  --color-rule: #e7e5e4;
-  --color-accent: #1d4ed8;
-  --color-accent-soft: #eff6ff;
+  --color-muted: #6e6e73;
+  --color-faint: #6e6e73;
+  --color-rule: #d2d2d7;
+  --color-accent: #0066cc;
+  --color-accent-soft: #e8f1fb;
+  --color-cta: #0071e3;
 
-  --font-display: "Space Grotesk", var(--font-cjk), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Inter", var(--font-cjk), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", var(--font-cjk), ui-sans-serif, sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", var(--font-cjk), ui-sans-serif, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.04), 0 6px 20px rgb(0 0 0 / 0.06);
+  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.05), 0 16px 40px rgb(0 0 0 / 0.10);
 }
 
-/* CJK face follows the page language, so Japanese never renders with Chinese glyph shapes. */
-:root { --font-cjk: "Noto Sans SC"; }
-:root:lang(ja) { --font-cjk: "Noto Sans JP"; }
+/* CJK face follows the page language: system fonts on Apple devices, Noto elsewhere.
+   Japanese never renders with Chinese glyph shapes. */
+:root { --font-cjk: "PingFang SC", "Noto Sans SC"; }
+:root:lang(ja) { --font-cjk: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP"; }
 
 @layer base {
   html {
@@ -30,7 +37,8 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: 1rem;
-    line-height: 1.75;
+    line-height: 1.7;
+    letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -48,13 +56,89 @@
 }
 
 @layer components {
-  /* Small caps-style section label. */
+  /* Containers: wide for sections, narrow for reading. */
+  .wrap { margin-inline: auto; width: 100%; max-width: 64rem; padding-inline: 1.25rem; }
+  .wrap-narrow { margin-inline: auto; width: 100%; max-width: 46rem; padding-inline: 1.25rem; }
+  @media (min-width: 640px) {
+    .wrap, .wrap-narrow { padding-inline: 2rem; }
+  }
+
+  /* Full-bleed band; alternate white / grey to pace the page. */
+  .band { padding-block: 4.5rem; }
+  .band-shade { background-color: var(--color-shade); }
+  @media (min-width: 768px) {
+    .band { padding-block: 6.5rem; }
+  }
+
+  /* Large page title, Apple-style tight tracking. */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+  :lang(ja) .display, :lang(zh-CN) .display { letter-spacing: -0.01em; line-height: 1.2; }
+
   .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-faint);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: var(--color-muted);
+  }
+
+  /* Gradient used only to mark one keyword per screen. */
+  .gradient-text {
+    background: linear-gradient(90deg, #0071e3 0%, #7b4ddb 55%, #d0408a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Raised card: near edge + soft far shadow. */
+  .card {
+    background-color: var(--color-card);
+    border-radius: 1.375rem;
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 250ms ease, transform 250ms ease;
+  }
+  a.card:hover, .card-hover:hover { box-shadow: var(--shadow-lift); }
+
+  /* Pill button, Apple "Learn more" style. */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    min-height: 44px;
+    padding-inline: 1.25rem;
+    border-radius: 980px;
+    background-color: var(--color-cta);
+    color: #fff;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: background-color 200ms;
+  }
+  .pill:hover { background-color: #0077ed; }
+  .pill-ghost {
+    background-color: transparent;
+    color: var(--color-accent);
+    box-shadow: inset 0 0 0 1px var(--color-accent);
+  }
+  .pill-ghost:hover { background-color: var(--color-accent); color: #fff; }
+
+  /* Frosted nav; solid fallback when blur is unavailable or reduced transparency is on. */
+  .glass {
+    background-color: rgb(255 255 255 / 0.96);
+  }
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .glass {
+      background-color: rgb(255 255 255 / 0.72);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      backdrop-filter: saturate(180%) blur(20px);
+    }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .glass { background-color: rgb(255 255 255 / 0.98); backdrop-filter: none; -webkit-backdrop-filter: none; }
   }
 
   .link {
@@ -87,8 +171,9 @@
   }
   .prose h2 {
     font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
     line-height: 1.4;
     margin-top: 2.2em;
   }
@@ -111,15 +196,15 @@
   .prose code {
     font-family: var(--font-mono);
     font-size: 0.9em;
-    background: var(--color-rule);
+    background: var(--color-shade);
     padding: 0.1em 0.35em;
-    border-radius: 4px;
+    border-radius: 6px;
   }
   .prose pre {
     background: var(--color-ink);
     color: var(--color-paper);
     padding: 1em 1.2em;
-    border-radius: 8px;
+    border-radius: 14px;
     overflow-x: auto;
     font-size: 0.875rem;
   }
@@ -156,6 +241,6 @@
   .post-body hr {
     margin: 1.25em 0;
     border: 0;
-    border-top: 1px dashed var(--color-rule);
+    border-top: 1px solid var(--color-rule);
   }
 }

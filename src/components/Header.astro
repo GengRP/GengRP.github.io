@@ -22,17 +22,17 @@ const items = [
 const isActive = (href: string) => current.startsWith(href);
 ---
 
-<header class="sticky top-0 z-30 border-b border-rule bg-paper/90 backdrop-blur">
-  <div class="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-6 gap-y-1 px-5 py-3 sm:px-8">
+<header class="glass sticky top-0 z-30 border-b border-black/10">
+  <div class="wrap flex h-12 items-center justify-between gap-x-6">
     <a
       href={path(lang)}
-      class="tap font-display text-lg font-bold tracking-tight text-ink transition-colors duration-200 hover:text-accent"
+      class="tap font-display text-[1.0625rem] font-semibold tracking-tight text-ink transition-opacity duration-200 hover:opacity-70"
     >
-      KOUHEI<span class="text-accent"> AI</span>
+      KOUHEI<span class="gradient-text"> AI</span>
     </a>
 
-    <div class="flex items-center gap-4">
-      <ul class="hidden items-center gap-5 text-[0.9375rem] sm:flex" aria-label={t.menu}>
+    <div class="flex items-center gap-5">
+      <ul class="hidden items-center gap-6 text-[0.8125rem] sm:flex" aria-label={t.menu}>
         {
           items.map((item) => (
             <li>
@@ -40,8 +40,8 @@ const isActive = (href: string) => current.startsWith(href);
                 href={item.href}
                 aria-current={isActive(item.href) ? 'page' : undefined}
                 class:list={[
-                  'tap transition-colors duration-200 hover:text-accent',
-                  isActive(item.href) ? 'font-medium text-ink' : 'text-muted',
+                  'tap transition-colors duration-200 hover:text-ink',
+                  isActive(item.href) ? 'text-ink' : 'text-ink/70',
                 ]}
               >
                 {item.label}
@@ -51,7 +51,8 @@ const isActive = (href: string) => current.startsWith(href);
         }
       </ul>
 
-      <ul class="flex items-center gap-0.5 font-mono text-xs" aria-label={t.langs}>
+      <!-- Segmented control for language. -->
+      <ul class="flex items-center rounded-full bg-black/[0.06] p-0.5 text-xs font-medium" aria-label={t.langs}>
         {
           LANGS.map((l) => (
             <li>
@@ -61,8 +62,8 @@ const isActive = (href: string) => current.startsWith(href);
                 lang={HTML_LANG[l]}
                 aria-current={l === lang ? 'true' : undefined}
                 class:list={[
-                  'tap rounded px-1.5 py-1 transition-colors duration-200',
-                  l === lang ? 'bg-ink text-paper' : 'text-faint hover:text-accent',
+                  'tap flex min-w-8 justify-center rounded-full px-2 py-1 transition-colors duration-200',
+                  l === lang ? 'bg-white text-ink shadow-[0_1px_3px_rgb(0_0_0/0.15)]' : 'text-ink/60 hover:text-ink',
                 ]}
               >
                 {LANG_LABEL[l]}
@@ -75,8 +76,8 @@ const isActive = (href: string) => current.startsWith(href);
   </div>
 
   <!-- On small screens the nav gets its own row instead of hiding behind a menu button. -->
-  <nav aria-label={t.menu} class="border-t border-rule sm:hidden">
-    <ul class="mx-auto flex max-w-3xl gap-5 overflow-x-auto px-5 text-[0.9375rem] whitespace-nowrap [scrollbar-width:none]">
+  <nav aria-label={t.menu} class="border-t border-black/5 sm:hidden">
+    <ul class="wrap flex gap-5 overflow-x-auto text-[0.875rem] whitespace-nowrap [scrollbar-width:none]">
       {
         items.map((item) => (
           <li>
@@ -84,8 +85,8 @@ const isActive = (href: string) => current.startsWith(href);
               href={item.href}
               aria-current={isActive(item.href) ? 'page' : undefined}
               class:list={[
-                'tap transition-colors duration-200 hover:text-accent',
-                isActive(item.href) ? 'font-medium text-ink' : 'text-muted',
+                'tap transition-colors duration-200 hover:text-ink',
+                isActive(item.href) ? 'font-medium text-ink' : 'text-ink/70',
               ]}
             >
               {item.label}

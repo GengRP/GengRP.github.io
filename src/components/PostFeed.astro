@@ -12,12 +12,12 @@ const t = ui[lang];
 const rendered = await Promise.all(posts.map(async (p) => ({ post: p, Content: (await render(p)).Content })));
 ---
 
-<ul class="divide-y divide-rule">
+<ul class="grid gap-5">
   {
     rendered.map(({ post, Content }) => (
-      <li id={post.slug} class="py-6">
-        <p class="flex flex-wrap items-baseline gap-x-3 font-mono text-xs text-faint">
-          <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date, lang)}</time>
+      <li id={post.slug} class="card p-6 sm:p-8">
+        <p class="flex flex-wrap items-baseline gap-x-3 text-[0.8125rem] text-muted">
+          <time datetime={post.data.date.toISOString()} class="font-medium text-ink">{formatDate(post.data.date, lang)}</time>
           {post.data.quote && (
             <span>
               {t.posts.quoting}{' '}
@@ -27,14 +27,14 @@ const rendered = await Promise.all(posts.map(async (p) => ({ post: p, Content: (
             </span>
           )}
         </p>
-        <div class="post-body mt-3">
+        <div class="post-body mt-4">
           <Content />
         </div>
-        <p class="mt-4 text-sm">
-          <a href={post.data.x} class="tap link" rel="noopener" target="_blank">
-            {t.posts.view} ↗
+        <p class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
+          <a href={post.data.x} class="tap text-accent hover:underline underline-offset-4" rel="noopener" target="_blank">
+            {t.posts.view} <span aria-hidden="true">↗</span>
           </a>
-          {t.posts.translated && <span class="ml-2 text-faint">· {t.posts.translated}</span>}
+          {t.posts.translated && <span class="text-muted">{t.posts.translated}</span>}
         </p>
       </li>
     ))

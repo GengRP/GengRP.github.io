@@ -8,18 +8,18 @@ interface Props {
 const { lang, posts } = Astro.props;
 ---
 
-<ul class="divide-y divide-rule">
+<ul class="grid gap-5">
   {
     posts.map((p) => (
       <li>
-        <a href={path(lang, `writing/${p.slug}`)} class="group block py-5 cursor-pointer">
-          <time datetime={p.data.date.toISOString()} class="font-mono text-xs text-faint">
+        <a href={path(lang, `writing/${p.slug}`)} class="card group block cursor-pointer p-6 sm:p-8">
+          <time datetime={p.data.date.toISOString()} class="text-[0.8125rem] text-muted">
             {formatDate(p.data.date, lang)}
           </time>
-          <h3 class="mt-1 font-display text-lg leading-snug font-semibold text-ink transition-colors duration-200 group-hover:text-accent">
+          <h3 class="mt-2 font-display text-2xl leading-snug font-bold tracking-tight text-ink transition-colors duration-200 group-hover:text-accent">
             {p.data.title}
           </h3>
-          <p class="mt-1.5 text-[0.9375rem] leading-relaxed text-muted">{p.data.summary}</p>
+          <p class="mt-2 text-[1.0625rem] leading-relaxed text-muted">{p.data.summary}</p>
         </a>
       </li>
     ))

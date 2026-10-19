@@ -18,68 +18,88 @@ const { profile } = site;
 ---
 
 <Base lang={lang} description={profile.tagline[lang]}>
-  <section class="mb-14">
-    <h1 class="font-display text-3xl leading-tight font-bold tracking-tight text-balance sm:text-4xl">
-      {profile.tagline[lang]}
-    </h1>
-    <p class="mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-muted">{profile.intro[lang]}</p>
+  <!-- Hero: one message, one action. -->
+  <section class="wrap pt-20 pb-20 text-center sm:pt-32 sm:pb-28">
+    <p class="text-lg font-semibold sm:text-xl"><span class="gradient-text">KOUHEI AI</span></p>
+    <h1 class="display mx-auto mt-4 max-w-4xl text-[2.75rem] sm:text-7xl">{profile.tagline[lang]}</h1>
+    <p class="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">{profile.intro[lang]}</p>
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+      <a href={DAILY_PATH[lang]} class="pill">{t.home.dailyCta}</a>
+      <a href={path(lang, 'posts')} class="tap text-[0.9375rem] text-accent hover:underline underline-offset-4">
+        {t.home.allPosts} <span aria-hidden="true">›</span>
+      </a>
+    </div>
   </section>
 
   {
     posts.length > 0 && (
-      <section class="mb-14">
-        <SectionHead title={t.home.latest} href={path(lang, 'writing')} linkLabel={t.home.allWriting} />
-        <PostList lang={lang} posts={posts} />
+      <section class="band band-shade">
+        <div class="wrap-narrow">
+          <SectionHead title={t.home.latest} href={path(lang, 'writing')} linkLabel={t.home.allWriting} />
+          <PostList lang={lang} posts={posts} />
+        </div>
       </section>
     )
   }
 
-  <section class="mb-14">
-    <SectionHead title={t.home.latestPosts} href={path(lang, 'posts')} linkLabel={t.home.allPosts} />
-    <PostFeed lang={lang} posts={shortPosts} />
-  </section>
-
-  <section class="mb-14">
-    <a
-      href={DAILY_PATH[lang]}
-      class="group block cursor-pointer rounded-xl border border-rule bg-card p-6 transition-colors duration-200 hover:border-accent"
-    >
-      <p class="eyebrow">{t.home.daily}</p>
-      <p class="mt-2 text-[1.0625rem] leading-relaxed">{t.home.dailyLead}</p>
-      <p class="mt-3 text-sm font-medium text-accent">
-        {t.home.dailyCta}
-        <span class="ml-1 inline-block transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-      </p>
-    </a>
-  </section>
-
-  <section class="mb-14">
-    <SectionHead title={t.home.projects} href={path(lang, 'projects')} linkLabel={t.home.allProjects} />
-    <div class="grid gap-4 sm:grid-cols-2">
-      {site.projects.map((p) => <ProjectCard lang={lang} project={p} />)}
+  <section class="band band-shade">
+    <div class="wrap-narrow">
+      <SectionHead title={t.home.latestPosts} href={path(lang, 'posts')} linkLabel={t.home.allPosts} />
+      <PostFeed lang={lang} posts={shortPosts} />
     </div>
   </section>
 
-  <section>
-    <SectionHead title={t.home.elsewhere} />
-    <ul class="divide-y divide-rule">
-      {
-        site.elsewhere.map((e) => (
-          <li class="flex items-baseline justify-between gap-4 py-3">
-            <span class="flex items-baseline gap-3">
+  <!-- AI daily: the one dark tile on the page. -->
+  <section class="band">
+    <div class="wrap">
+      <a
+        href={DAILY_PATH[lang]}
+        class="group block cursor-pointer rounded-[2rem] bg-black px-8 py-16 text-center text-white transition-shadow duration-300 hover:shadow-[0_20px_60px_rgb(0_0_0/0.25)] sm:px-16 sm:py-24"
+      >
+        <h2 class="display text-4xl sm:text-6xl"><span class="gradient-text">{t.home.daily}</span></h2>
+        <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white/80 sm:text-xl">{t.home.dailyLead}</p>
+        <p class="mt-8 inline-flex min-h-11 items-center rounded-full bg-white px-6 text-[0.9375rem] font-medium text-ink transition-colors duration-200 group-hover:bg-white/90">
+          {t.home.dailyCta} <span class="ml-1" aria-hidden="true">›</span>
+        </p>
+      </a>
+    </div>
+  </section>
+
+  <section class="band band-shade">
+    <div class="wrap">
+      <SectionHead title={t.home.projects} href={path(lang, 'projects')} linkLabel={t.home.allProjects} />
+      <div class="grid gap-5 sm:grid-cols-2">
+        {site.projects.map((p) => <ProjectCard lang={lang} project={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap-narrow">
+      <SectionHead title={t.home.elsewhere} />
+      <ul class="card divide-y divide-rule/60 px-6 sm:px-8">
+        {
+          site.elsewhere.map((e) => (
+            <li class="flex items-center justify-between gap-4 py-4">
+              <span class="flex flex-wrap items-baseline gap-x-3">
+                {e.href ? (
+                  <a href={e.href} class="tap font-semibold text-ink transition-colors duration-200 hover:text-accent" rel="me">
+                    {e.label}
+                  </a>
+                ) : (
+                  <span class="font-semibold text-muted">{e.label}</span>
+                )}
+                <span class="text-sm text-muted">{e.note[lang]}</span>
+              </span>
               {e.href ? (
-                <a href={e.href} class="tap link font-medium" rel="me">
-                  {e.label}
-                </a>
+                <span class="text-accent" aria-hidden="true">›</span>
               ) : (
-                <span class="font-medium text-faint">{e.label}</span>
+                <span class="shrink-0 rounded-full bg-shade px-2.5 py-0.5 text-xs text-muted">{t.soon}</span>
               )}
-              <span class="text-sm text-faint">{e.note[lang]}</span>
-            </span>
-            {!e.href && <span class="shrink-0 text-xs text-faint">{t.soon}</span>}
-          </li>
-        ))
-      }
-    </ul>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </section>
 </Base>

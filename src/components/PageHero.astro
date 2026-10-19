@@ -1,0 +1,13 @@
+---
+/** Top band of an inner page: one large title and a short lead. */
+interface Props {
+  title: string;
+  lead?: string;
+}
+const { title, lead } = Astro.props;
+---
+
+<section class="wrap pt-16 pb-12 sm:pt-24 sm:pb-16">
+  <h1 class="display text-5xl sm:text-[4rem]">{title}</h1>
+  {lead && <p class="mt-5 max-w-2xl text-xl leading-relaxed text-muted sm:text-2xl">{lead}</p>}
+</section>

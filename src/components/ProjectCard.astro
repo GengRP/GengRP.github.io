@@ -10,14 +10,12 @@ const t = ui[lang];
 const siteHref = project.site === 'daily' ? DAILY_PATH[lang] : project.site;
 ---
 
-<article class="rounded-xl border border-rule bg-card p-5 transition-colors duration-200 hover:border-stone-300">
-  <div class="flex items-start justify-between gap-3">
-    <h3 class="font-display text-lg leading-snug font-semibold">{project.title[lang]}</h3>
-    <span class="shrink-0 rounded-full bg-accent-soft px-2.5 py-0.5 text-xs text-accent">{project.status[lang]}</span>
-  </div>
-  <p class="mt-2 text-[0.9375rem] leading-relaxed text-muted">{project.summary[lang]}</p>
-  <div class="mt-3 flex gap-4 text-sm">
-    {siteHref && <a href={siteHref} class="tap link">{t.projects.site} →</a>}
-    {project.repo && <a href={project.repo} class="tap link">{t.projects.repo} →</a>}
+<article class="card card-hover flex h-full flex-col p-6 sm:p-8">
+  <span class="self-start rounded-full bg-accent-soft px-3 py-1 text-xs font-medium text-accent">{project.status[lang]}</span>
+  <h3 class="mt-4 font-display text-2xl leading-snug font-bold tracking-tight">{project.title[lang]}</h3>
+  <p class="mt-2 flex-1 text-[1.0625rem] leading-relaxed text-muted">{project.summary[lang]}</p>
+  <div class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-[0.9375rem]">
+    {siteHref && <a href={siteHref} class="tap text-accent hover:underline underline-offset-4">{t.projects.site} <span aria-hidden="true">›</span></a>}
+    {project.repo && <a href={project.repo} class="tap text-accent hover:underline underline-offset-4">{t.projects.repo} <span aria-hidden="true">›</span></a>}
   </div>
 </article>

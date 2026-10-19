@@ -17,7 +17,7 @@ const order = ['X', 'LinkedIn', 'GitHub'];
 const cards = order.map((label) => site.elsewhere.find((e) => e.label === label)).filter((e) => e && e.href);
 ---
 
-<ul class="grid grid-cols-3 gap-3">
+<ul class="grid grid-cols-1 gap-4 min-[420px]:grid-cols-3">
   {
     cards.map((e) => (
       <li>
@@ -25,17 +25,17 @@ const cards = order.map((label) => site.elsewhere.find((e) => e.label === label)
           href={e!.href}
           rel="me noopener"
           target="_blank"
-          class="group flex h-full cursor-pointer flex-col gap-3 rounded-lg border border-rule bg-card p-4 sm:p-5 transition-colors duration-200 hover:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          class="card group flex h-full cursor-pointer flex-col gap-6 p-5 sm:p-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           <div class="flex items-center justify-between">
-            <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current text-ink" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="h-7 w-7 fill-current text-ink" aria-hidden="true">
               <path d={icons[e!.label]} />
             </svg>
             <span class="text-faint transition-colors duration-200 group-hover:text-accent" aria-hidden="true">↗</span>
           </div>
           <div>
-            <p class="font-medium transition-colors duration-200 group-hover:text-accent">{e!.label}</p>
-            <p class="mt-0.5 font-mono text-xs text-muted break-all">{e!.handle}</p>
+            <p class="font-semibold transition-colors duration-200 group-hover:text-accent">{e!.label}</p>
+            <p class="mt-0.5 text-[0.8125rem] text-muted break-all">{e!.handle}</p>
           </div>
         </a>
       </li>
