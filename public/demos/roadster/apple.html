@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tesla Roadster</title>
+<style>
+:root {
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans CJK SC", "Noto Sans JP", "Microsoft YaHei", sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; overflow: hidden; }
+body { font-family: var(--font); -webkit-font-smoothing: antialiased; }
+#viewport { position: fixed; inset: 0; overflow: hidden; }
+#stage { position: absolute; left: 0; top: 0; width: 1600px; height: 900px; transform-origin: 0 0; }
+.slide { position: absolute; inset: 0; padding: 64px 96px 92px; display: flex; flex-direction: column; visibility: hidden; opacity: 0; }
+.slide.on { visibility: visible; opacity: 1; }
+.head { flex: none; max-width: 1240px; }
+.fig { flex: 1; min-height: 0; display: flex; flex-direction: column; margin-top: 28px; }
+.fig canvas { flex: 1; min-height: 0; width: 100%; display: block; }
+.ctrl { flex: none; display: flex; align-items: center; gap: 28px; margin-top: 18px; min-height: 52px; }
+.ctrl label { display: flex; align-items: center; gap: 16px; font-size: 20px; }
+.ctrl input[type=range] { width: 420px; height: 44px; cursor: pointer; }
+.ctrl output { font-family: var(--mono); font-size: 22px; min-width: 110px; }
+.state { font-size: 22px; font-weight: 600; }
+.note { font-size: 18px; line-height: 1.5; margin-top: 10px; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 18px; font-size: 24px; line-height: 1.5; }
+button, .btn { font: inherit; cursor: pointer; }
+.replay { font-size: 20px; padding: 10px 22px; min-height: 44px; }
+#foot { position: absolute; left: 96px; bottom: 36px; font-size: 18px; }
+#dots { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 2px; }
+#dots button { width: 44px; height: 44px; background: none; border: 0; display: grid; place-items: center; }
+#dots button span { display: block; width: 12px; height: 12px; }
+#top { position: absolute; right: 96px; top: 28px; display: flex; gap: 16px; align-items: center; font-size: 17px; z-index: 5; }
+.seg { display: flex; }
+.seg a { padding: 6px 14px; text-decoration: none; min-height: 36px; display: grid; place-items: center; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .slide { transition: none !important; } }
+
+body { background: #000; color: #F5F5F7; --focus: #2997FF; }
+.slide { transition: opacity .35s cubic-bezier(.2,.8,.2,1); }
+.kicker { font-size: 22px; color: #A1A1A6; font-weight: 500; margin-bottom: 18px; }
+h1 { word-break: auto-phrase; font-size: 64px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.1; }
+.cover h1 { font-size: 84px; max-width: 1360px; }
+.lead { font-size: 26px; line-height: 1.5; color: #A1A1A6; margin-top: 18px; max-width: 1100px; }
+.note { color: #86868B; }
+.hint { color: #86868B; }
+.replay { background: #1C1C1E; color: #F5F5F7; border: 0; border-radius: 999px; transition: background .2s; }
+.replay:hover { background: #2C2C2E; }
+.ctrl label { color: #A1A1A6; }
+.ctrl output { color: #F5F5F7; }
+.thrust-range { accent-color: #FF9F0A; } .press-range { accent-color: #2997FF; }
+.state { color: #86868B; } .state[data-ok="1"] { color: #F5F5F7; }
+.cols p { color: #A1A1A6; }
+#foot { color: #86868B; }
+#dots button span { border-radius: 50%; background: #48484A; transition: background .2s; }
+#dots button[aria-current] span { background: #F5F5F7; }
+.seg { background: #1C1C1E; border-radius: 999px; padding: 3px; }
+.seg a { color: #A1A1A6; border-radius: 999px; transition: background .2s, color .2s; }
+.seg a[aria-current] { background: #3A3A3C; color: #F5F5F7; }
+#other { color: #2997FF; text-decoration: none; }
+#other:hover, #back:hover { text-decoration: underline; }
+#back { color: #2997FF; text-decoration: none; }
+
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage">
+
+<div id="top">
+  <nav class="seg" aria-label="language"><a data-lang="zh">中文</a><a data-lang="ja">日本語</a><a data-lang="en">EN</a></nav>
+  <a id="other" class="btn" data-t="ui.other"></a>
+</div>
+
+<section class="slide cover" data-ch="0">
+  <div class="head">
+    <p class="kicker" data-t="s1.kicker"></p>
+    <h1 data-t="s1.title"></h1>
+    <p class="lead" data-t="s1.lead"></p>
+  </div>
+  <div class="fig"><canvas data-draw="cover" data-w="1408" data-h="380"></canvas></div>
+  <p class="note hint" data-t="s1.hint"></p>
+</section>
+
+<section class="slide" data-ch="1">
+  <div class="head"><h1 data-t="s2.title"></h1><p class="lead" data-t="s2.lead"></p></div>
+  <div class="fig"><canvas data-draw="jet" data-w="1408" data-h="440" data-dur="5"></canvas>
+    <div class="ctrl"><button class="replay" data-t="ui.replay"></button></div></div>
+  <p class="note" data-t="s2.note"></p>
+</section>
+
+<section class="slide" data-ch="1">
+  <div class="head"><h1 data-t="s3.title"></h1><p class="lead" data-t="s3.lead"></p></div>
+  <div class="fig"><canvas data-draw="lift" data-w="1408" data-h="440"></canvas>
+    <div class="ctrl">
+      <label><span data-t="s3.slider"></span><input type="range" min="0" max="40" step="0.5" value="8" class="thrust-range"><output></output></label>
+      <p class="state"></p>
+    </div></div>
+  <p class="note" data-t="s3.weight"></p>
+</section>
+
+<section class="slide" data-ch="1">
+  <div class="head"><h1 data-t="s4.title"></h1><p class="lead" data-t="s4.lead"></p></div>
+  <div class="fig"><canvas data-draw="tank" data-w="1408" data-h="440" data-dur="6"></canvas>
+    <div class="ctrl"><button class="replay" data-t="ui.replay"></button></div></div>
+  <p class="note" data-t="s4.note"></p>
+</section>
+
+<section class="slide" data-ch="2">
+  <div class="head"><h1 data-t="s5.title"></h1><p class="lead" data-t="s5.lead"></p></div>
+  <div class="fig"><canvas data-draw="suck" data-w="1408" data-h="440" data-dur="5"></canvas>
+    <div class="ctrl"><button class="replay" data-t="ui.replay"></button></div></div>
+</section>
+
+<section class="slide" data-ch="2">
+  <div class="head"><h1 data-t="s6.title"></h1><p class="lead" data-t="s6.lead"></p></div>
+  <div class="fig"><canvas data-draw="hang" data-w="1408" data-h="440"></canvas>
+    <div class="ctrl">
+      <label><span data-t="s6.slider"></span><input type="range" min="0" max="12" step="0.1" value="2" class="press-range"><output></output></label>
+      <p class="state"></p>
+    </div></div>
+  <p class="note"><span data-t="s6.claim"></span> <span data-t="s6.assume"></span></p>
+</section>
+
+<section class="slide" data-ch="3">
+  <div class="head"><h1 data-t="s7.title"></h1></div>
+  <div class="fig"><canvas data-draw="sum" data-w="1408" data-h="360"></canvas></div>
+  <div class="cols"><p data-t="s7.left"></p><p data-t="s7.right"></p></div>
+  <p class="note"><span data-t="s7.src"></span> <a id="back" data-t="s7.back"></a></p>
+</section>
+
+<div id="foot"></div>
+<nav id="dots" aria-label="pages"></nav>
+</div></div>
+
+<script>
+const STYLE = "apple", OTHER = "neo.html";
+const TH = {"brut": false, "line": 1.5, "arrow": 5, "ink": "#F5F5F7", "paper": "#1C1C1E", "muted": "#86868B", "car": "#E8E8ED", "glass": "#2C2C2E", "tire": "#1C1C1E", "hub": "#8E8E93", "thrust": "#FF9F0A", "press": "#2997FF", "grav": "#8E8E93", "groundFill": "#0B0B0C", "groundLine": "#3A3A3C", "canvasBg": "#000000"};
+const STR = {
+zh: {
+  ui: { replay: "重播", other: "换成新粗野风格", chapters: ["开场", "飞起来", "倒挂", "总结"] },
+  s1: { kicker: "示例课件 · 特斯拉 2026-10-15 发布会", title: "一辆车，怎么飞起来、怎么倒挂？", lead: "特斯拉新一代 Roadster 现场演示了两件事：喷气跃到空中翻滚，和在弧形坡道顶端倒挂着停住。背后是两条中学物理。", hint: "滚轮、方向键或空格翻页" },
+  s2: { title: "往后喷气，车就往前冲", lead: "车把气体用力往后推出去，气体也用同样大的力把车往前推。这叫作用力与反作用力。", gas: "喷出的气", thrust: "推力", note: "Thrust 款车尾有 4 个冷气推进器，特斯拉公布的推力约 80 kN。" },
+  s3: { title: "往下喷的力比车重，车就离地", lead: "拖动滑块，改变往下喷气的推力。", slider: "向下的推力", weight: "车重约 1,700 kg，受到的重力约 16.7 kN。", up: "推力", down: "重力", on: "推力大于重力：离地了", off: "推力小于重力：还在地上" },
+  s4: { title: "为什么只能飞几秒：气很快就喷完了", lead: "推进器喷的是压缩空气，气罐压力约 10,000 PSI（约 690 个大气压）。气一喷完，推力就没了，车落回地面。", tank: "气罐", sec: "秒", up: "推力", down: "重力", note: "现场的「飞」是几秒钟的跃起、翻滚和短暂悬停，不是持续飞行。" },
+  s5: { title: "抽走车底的空气，大气就把车压在路上", lead: "车底四周有裙边封住，风扇把里面的空气往外抽。车底气压变低，车顶上的大气压不变，压力差把车按向路面。", outside: "外面：正常大气压", inside: "车底：气压变低", fan: "风扇", skirt: "裙边" },
+  s6: { title: "压力差 × 车底面积 > 车重，就能倒挂", lead: "拖动滑块，改变车底比外面低多少气压。", slider: "车底压差", force: "吸附力", down: "重力", stick: "吸附力大于重力：挂住了", fall: "吸附力小于重力：掉下来", claim: "特斯拉公布的下压力约 4,700 kg（约 46 kN），有媒体认为偏高。", assume: "车底密封面积按 5 m² 估算，这是我们的假设，不是官方数字。" },
+  s7: { title: "一个往外推，一个往里压", left: "飞起来：把气往外喷，反作用力推着车走。", right: "倒挂：把车底的气抽走，大气压把车按住。", src: "事实来源：特斯拉 2026-10-15 发布会；Electrek、New Atlas 报道。车底面积为估算。", back: "回到教程文章 →", up: "推力", press: "大气压" }
+},
+ja: {
+  ui: { replay: "もう一度", other: "ネオブルータリズム版を見る", chapters: ["はじめに", "飛ぶ", "張り付く", "まとめ"] },
+  s1: { kicker: "サンプル教材 · テスラ 2026-10-15 発表会", title: "車が、どうやって飛ぶ？ 逆さまに張り付く？", lead: "テスラの新型 Roadster は発表会で2つのことを見せた。ガスを噴いて宙を跳び回転すること、そして弧を描くランプの頂上で逆さまのまま止まること。どちらも中学で習う物理で説明できる。", hint: "ホイール・矢印キー・スペースでページ送り" },
+  s2: { title: "後ろにガスを噴くと、車は前に進む", lead: "車がガスを強く後ろへ押し出すと、ガスも同じ大きさの力で車を前へ押し返す。作用・反作用の法則だ。", gas: "噴き出すガス", thrust: "推力", note: "Thrust グレードは車体後部に冷ガス推進器を4基搭載。テスラ発表の推力は約 80 kN。" },
+  s3: { title: "下向きの推力が車重を超えると、車は浮く", lead: "スライダーで、下向きに噴く推力を変えてみよう。", slider: "下向きの推力", weight: "車重は約 1,700 kg、かかる重力は約 16.7 kN。", up: "推力", down: "重力", on: "推力 > 重力：浮いた", off: "推力 < 重力：まだ地面の上" },
+  s4: { title: "数秒しか飛べない理由：ガスがすぐ尽きる", lead: "噴いているのは圧縮空気で、タンクの圧力は約 10,000 PSI（約 690 気圧）。ガスがなくなれば推力も消え、車は地面に戻る。", tank: "タンク", sec: "秒", up: "推力", down: "重力", note: "発表会の「飛行」は数秒間のジャンプ・回転・短いホバリングで、持続的な飛行ではない。" },
+  s5: { title: "車の下の空気を抜くと、大気が車を路面に押し付ける", lead: "車体の下はスカートで囲まれ、ファンが中の空気を外へ吸い出す。車の下だけ気圧が下がり、上からの大気圧はそのまま。この差が車を路面へ押し付ける。", outside: "外：ふつうの大気圧", inside: "車の下：気圧が低い", fan: "ファン", skirt: "スカート" },
+  s6: { title: "圧力差 × 車底の面積 > 車重 なら、逆さまでも落ちない", lead: "スライダーで、車の下の気圧が外よりどれだけ低いかを変えてみよう。", slider: "車底の圧力差", force: "吸着力", down: "重力", stick: "吸着力 > 重力：張り付いた", fall: "吸着力 < 重力：落ちる", claim: "テスラ発表のダウンフォースは約 4,700 kg（約 46 kN）。高すぎるという指摘もある。", assume: "車底の密閉面積は 5 m² と仮定（公式の数字ではない）。" },
+  s7: { title: "ひとつは外へ押し出し、ひとつは内へ押し付ける", left: "飛ぶ：ガスを外へ噴き、その反作用で車が進む。", right: "張り付く：車の下の空気を抜き、大気圧で車を押さえる。", src: "出典：テスラ 2026-10-15 発表会、Electrek・New Atlas の報道。車底面積は推定。", back: "解説記事に戻る →", up: "推力", press: "大気圧" }
+},
+en: {
+  ui: { replay: "Replay", other: "See the Neo-Brutalist version", chapters: ["Intro", "Flying", "Hanging", "Summary"] },
+  s1: { kicker: "Sample deck · Tesla unveiling, Oct 15, 2026", title: "How does a car fly, and hang upside down?", lead: "At its unveiling, Tesla's new Roadster did two things: it jumped and rolled in the air on gas jets, and it stopped upside down at the top of a curved ramp. Both come down to school physics.", hint: "Scroll, arrow keys or space to turn pages" },
+  s2: { title: "Blow gas backward, the car goes forward", lead: "When the car pushes gas out the back, the gas pushes the car forward just as hard. Action and reaction.", gas: "Gas out", thrust: "Thrust", note: "The Thrust trim has four cold-gas thrusters at the rear. Tesla quotes about 80 kN of thrust." },
+  s3: { title: "More downward thrust than weight: lift-off", lead: "Drag the slider to change the downward thrust.", slider: "Downward thrust", weight: "The car weighs about 1,700 kg, so gravity pulls with about 16.7 kN.", up: "Thrust", down: "Gravity", on: "Thrust > gravity: lifted off", off: "Thrust < gravity: still on the ground" },
+  s4: { title: "Why only a few seconds: the air runs out", lead: "The thrusters blow compressed air stored at about 10,000 PSI (about 690 atmospheres). Once the tank is empty, the thrust is gone and the car comes back down.", tank: "Tank", sec: "s", up: "Thrust", down: "Gravity", note: "The “flight” shown was a few seconds of jumping, rolling and brief hovering, not sustained flight." },
+  s5: { title: "Pump the air out from underneath, and the atmosphere holds the car down", lead: "Skirts seal the underside and fans pump the air out. Pressure under the car drops while the air above still presses down. The difference pins the car to the road.", outside: "Outside: normal air pressure", inside: "Underneath: lower pressure", fan: "Fan", skirt: "Skirt" },
+  s6: { title: "Pressure gap × floor area > weight: it hangs upside down", lead: "Drag the slider to change how much lower the pressure is under the car.", slider: "Pressure gap", force: "Suction", down: "Gravity", stick: "Suction > gravity: it sticks", fall: "Suction < gravity: it falls", claim: "Tesla quotes about 4,700 kg (about 46 kN) of downforce; some reviewers think that is too high.", assume: "Sealed floor area assumed to be 5 m², our estimate, not an official figure." },
+  s7: { title: "One pushes out, the other presses in", left: "Flying: blow air out, and the reaction pushes the car.", right: "Hanging: pump air out from underneath, and the atmosphere holds the car.", src: "Sources: Tesla unveiling (Oct 15, 2026); reporting by Electrek and New Atlas. Floor area is estimated.", back: "Back to the article →", up: "Thrust", press: "Air pressure" }
+}};
+const ARTICLE = { zh: "/writing/ai-html-slides/", ja: "/ja/writing/ai-html-slides/", en: "/en/writing/ai-html-slides/" };
+
+const params = new URLSearchParams(location.search);
+const LANG = STR[params.get("lang")] ? params.get("lang") : "zh";
+const S = STR[LANG];
+const get = (k) => k.split(".").reduce((o, p) => o && o[p], S);
+document.documentElement.lang = LANG === "zh" ? "zh-CN" : LANG;
+document.title = S.s1.title;
+document.querySelectorAll("[data-t]").forEach((el) => { el.textContent = get(el.dataset.t); });
+document.querySelectorAll(".seg a").forEach((a) => {
+  a.href = "?lang=" + a.dataset.lang + location.hash;
+  if (a.dataset.lang === LANG) a.setAttribute("aria-current", "true");
+});
+document.getElementById("back").href = ARTICLE[LANG];
+const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- stage scaling ---------- */
+const stage = document.getElementById("stage");
+function fit() {
+  const k = Math.min(innerWidth / 1600, innerHeight / 900);
+  stage.style.transform = `translate(${(innerWidth - 1600 * k) / 2}px, ${(innerHeight - 900 * k) / 2}px) scale(${k})`;
+}
+addEventListener("resize", () => { fit(); sizeAll(); });
+fit();
+
+/* ---------- drawing helpers ---------- */
+const DPR = 2;
+const lerp = (a, b, t) => a + (b - a) * t;
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+const ease = (x) => 1 - Math.pow(1 - clamp(x, 0, 1), 3);
+const rnd = (i) => { const s = Math.sin(i * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+const FONT = (w, px) => `${w} ${px}px ${getComputedStyle(document.body).fontFamily}`;
+
+const BODY = new Path2D("M-150 -24 L-148 -52 Q-120 -60 -90 -62 Q-40 -96 10 -92 Q50 -88 80 -64 Q130 -54 152 -40 Q158 -30 150 -24 Z");
+const GLASS = new Path2D("M-70 -66 Q-30 -88 10 -87 Q40 -84 62 -66 Z");
+const TOP = [[-150, 48], [-148, 52], [-90, 62], [-40, 84], [10, 92], [50, 86], [80, 64], [150, 40], [152, 40]];
+const roofAt = (xl) => { for (let i = 1; i < TOP.length; i++) if (xl <= TOP[i][0]) { const [x0, y0] = TOP[i - 1], [x1, y1] = TOP[i]; return lerp(y0, y1, (xl - x0) / (x1 - x0)); } return 40; };
+
+function car(c, x, y, s, rot = 0) {
+  c.save(); c.translate(x, y); if (rot) c.rotate(rot); c.scale(s, s);
+  const lw = TH.line / s;
+  if (TH.brut) { c.save(); c.translate(6 / s, 6 / s); c.fillStyle = TH.ink; c.fill(BODY); c.restore(); }
+  c.fillStyle = TH.car; c.fill(BODY);
+  if (TH.brut) { c.lineWidth = lw; c.strokeStyle = TH.ink; c.lineJoin = "round"; c.stroke(BODY); }
+  c.fillStyle = TH.glass; c.fill(GLASS);
+  for (const wx of [-95, 95]) {
+    c.beginPath(); c.arc(wx, -26, 26, 0, Math.PI * 2); c.fillStyle = TH.tire; c.fill();
+    if (TH.brut) { c.lineWidth = lw; c.strokeStyle = TH.ink; c.stroke(); }
+    c.beginPath(); c.arc(wx, -26, 11, 0, Math.PI * 2); c.fillStyle = TH.hub; c.fill();
+  }
+  c.restore();
+}
+
+function label(c, text, x, y, color, align = "left", size = 22) {
+  c.font = FONT(TH.brut ? 800 : 600, size); c.textBaseline = "middle";
+  const w = c.measureText(text).width;
+  let lx = align === "center" ? x - w / 2 : align === "right" ? x - w : x;
+  if (TH.brut) {
+    const p = 10, h = size + 14;
+    c.fillStyle = TH.ink; c.fillRect(lx - p + 4, y - h / 2 + 4, w + 2 * p, h);
+    c.fillStyle = color === TH.ink ? TH.paper : color; c.fillRect(lx - p, y - h / 2, w + 2 * p, h);
+    c.lineWidth = 3; c.strokeStyle = TH.ink; c.strokeRect(lx - p, y - h / 2, w + 2 * p, h);
+    c.fillStyle = TH.ink;
+  } else c.fillStyle = color;
+  c.fillText(text, lx, y);
+}
+
+function arrow(c, x1, y1, x2, y2, color, lw) {
+  const L = Math.hypot(x2 - x1, y2 - y1); if (L < 6) return;
+  lw = lw || TH.arrow; const ux = (x2 - x1) / L, uy = (y2 - y1) / L, hs = Math.min(lw * 4.2, L * 0.6);
+  const draw = (dx, dy, col) => {
+    c.strokeStyle = col; c.fillStyle = col; c.lineWidth = lw; c.lineCap = "butt";
+    c.beginPath(); c.moveTo(x1 + dx, y1 + dy); c.lineTo(x2 - ux * hs + dx, y2 - uy * hs + dy); c.stroke();
+    c.beginPath(); c.moveTo(x2 + dx, y2 + dy);
+    c.lineTo(x2 - ux * hs - uy * hs * 0.6 + dx, y2 - uy * hs + ux * hs * 0.6 + dy);
+    c.lineTo(x2 - ux * hs + uy * hs * 0.6 + dx, y2 - uy * hs - ux * hs * 0.6 + dy); c.closePath(); c.fill();
+  };
+  if (TH.brut && color !== TH.ink) { draw(3, 3, TH.ink); }
+  draw(0, 0, color);
+}
+
+function ground(c, y, W) {
+  c.fillStyle = TH.groundFill; c.fillRect(0, y, W, 2000);
+  c.strokeStyle = TH.groundLine; c.lineWidth = TH.brut ? 4 : 2;
+  c.beginPath(); c.moveTo(0, y); c.lineTo(W, y); c.stroke();
+}
+
+function jets(c, x, y, len, dir, alpha) {
+  // gas puffs from (x,y) along dir (unit vec), deterministic shimmer
+  if (len < 2 || alpha <= 0) return;
+  c.save(); c.globalAlpha = alpha;
+  c.fillStyle = TH.thrust;
+  c.beginPath();
+  const [dx, dy] = dir, px = -dy, py = dx;
+  c.moveTo(x + px * 10, y + py * 10);
+  c.lineTo(x + dx * len + px * (10 + len * 0.12), y + dy * len + py * (10 + len * 0.12));
+  c.lineTo(x + dx * len - px * (10 + len * 0.12), y + dy * len - py * (10 + len * 0.12));
+  c.lineTo(x - px * 10, y - py * 10); c.closePath();
+  c.globalAlpha = alpha * (TH.brut ? 1 : 0.85); c.fill();
+  if (TH.brut) { c.globalAlpha = alpha; c.lineWidth = 3; c.strokeStyle = TH.ink; c.stroke(); }
+  c.restore();
+}
+
+/* ---------- pages ---------- */
+const WEIGHT = 16.7, AREA = 5;
+const DRAW = {
+  cover(c, t, W, H) {
+    ground(c, 320, W);
+    car(c, W * 0.6, 320, 2.1);
+    jets(c, W * 0.6 - 150 * 2.1, 320 - 42 * 2.1, 260, [-1, 0], 1);
+  },
+  jet(c, t, W, H) {
+    const G = 360, s = 1.35, xAt = (tt) => 470 + 34 * Math.pow(clamp(tt - 0.5, 0, 4), 2);
+    ground(c, G, W);
+    const x = xAt(t), rearOff = 150 * s, ny = G - 42 * s;
+    for (let i = 0; i < 200; i++) {
+      const ti = 0.5 + i * 0.022; if (ti > Math.min(t, 4.5)) break;
+      const age = t - ti, a = 1 - age / 1.1; if (a <= 0) continue;
+      const px = xAt(ti) - rearOff - age * 650 - rnd(i) * 40, py = ny + (rnd(i + 99) - 0.5) * (8 + age * 140);
+      c.globalAlpha = a * (TH.brut ? 1 : 0.6); c.fillStyle = TH.thrust;
+      c.beginPath(); c.arc(px, py, 5 + age * 14, 0, Math.PI * 2); c.fill();
+      if (TH.brut) { c.lineWidth = 2; c.strokeStyle = TH.ink; c.stroke(); }
+    }
+    c.globalAlpha = 1;
+    car(c, x, G, s);
+    const k = clamp((t - 0.6) / 0.3, 0, 1);
+    if (k > 0) {
+      c.globalAlpha = k;
+      arrow(c, x - 60, G - 175, x + 170, G - 175, TH.thrust); label(c, get("s2.thrust"), x + 190, G - 175, TH.thrust);
+      const gx = x - rearOff - 20; arrow(c, gx, G - 175, gx - 150, G - 175, TH.thrust);
+      label(c, get("s2.gas"), gx - 75, G - 125, TH.thrust, "center");
+      c.globalAlpha = 1;
+    }
+  },
+  lift(c, t, W, H, st) {
+    const G = 390, v = st.v, s = 1.45;
+    const lift = v > WEIGHT ? Math.min(170, 50 + (v - WEIGHT) * 7) : 0;
+    st.shown = lerp(st.shown ?? lift, lift, REDUCED ? 1 : 0.12);
+    const y = G - st.shown, x = 560;
+    ground(c, G, W);
+    for (const dx of [-40, 40]) jets(c, x + dx * s, y - 24 * s, 24 + v * 3.2, [0, 1], v > 0 ? 1 : 0);
+    car(c, x, y, s);
+    const mid = y - 60, ax = x + 290;
+    const tl = Math.min(v * 5, mid - 30); arrow(c, ax, mid, ax, mid - tl, TH.thrust); label(c, `${get("s3.up")} ${v.toFixed(1)} kN`, ax + 26, mid - Math.max(20, tl - 12), TH.thrust);
+    arrow(c, ax, mid, ax, mid + WEIGHT * 5, TH.grav); label(c, `${get("s3.down")} ${WEIGHT} kN`, ax + 26, mid + WEIGHT * 5 - 12, TH.grav);
+  },
+  tank(c, t, W, H) {
+    const G = 400, s = 1.15, x = 520, burnEnd = 3.5;
+    let h = 0, v = 0;
+    for (let tt = 0; tt < t; tt += 1 / 120) {
+      const firing = tt > 0.5 && tt < burnEnd;
+      v += (firing ? 48 : -260) / 120; h += v / 120; if (h <= 0) { h = 0; v = Math.max(0, v); }
+    }
+    const level = clamp(1 - (t - 0.5) / (burnEnd - 0.5), 0, 1), firing = t > 0.5 && t < burnEnd;
+    ground(c, G, W);
+    const y = G - h;
+    if (firing) for (const dx of [-40, 40]) jets(c, x + dx * s, y - 24 * s, 70 + 30 * level, [0, 1], 1);
+    car(c, x, y, s);
+    const mid = y - 55, ax = x + 240;
+    if (firing) { arrow(c, ax, mid, ax, mid - 130, TH.thrust); label(c, get("s4.up"), ax + 24, mid - 116, TH.thrust); }
+    arrow(c, ax, mid, ax, mid + 87, TH.grav); label(c, get("s4.down"), ax + 26, mid + 72, TH.grav);
+    // tank gauge
+    const gx = 1130, gy = 60, gw = 84, gh = 280;
+    c.lineWidth = TH.brut ? 4 : 2; c.strokeStyle = TH.brut ? TH.ink : TH.muted;
+    if (TH.brut) { c.fillStyle = TH.ink; c.fillRect(gx + 6, gy + 6, gw, gh); c.fillStyle = TH.paper; c.fillRect(gx, gy, gw, gh); }
+    c.fillStyle = TH.thrust; c.fillRect(gx, gy + gh * (1 - level), gw, gh * level);
+    c.strokeRect(gx, gy, gw, gh);
+    label(c, get("s4.tank"), gx + gw / 2, gy + gh + 34, TH.ink, "center");
+    c.font = FONT(600, 34); c.fillStyle = TH.ink; c.textBaseline = "middle"; c.textAlign = "left";
+    c.fillText(`${Math.min(t, 6).toFixed(1)} ${get("s4.sec")}`, 40, 40);
+  },
+  suck(c, t, W, H) {
+    const G = 360, s = 2.9, x = W / 2 - 40;
+    const p = ease((t - 0.8) / 3);
+    ground(c, G, W);
+    const top = G - 24 * s, L = x - 146 * s, R = x + 148 * s;
+    // under-car region
+    c.fillStyle = TH.press; c.globalAlpha = TH.brut ? 0.18 + 0.1 * (1 - p) : 0.12 + 0.1 * (1 - p);
+    c.fillRect(L, top, R - L, G - top); c.globalAlpha = 1;
+    for (let i = 0; i < 70; i++) {
+      const gone = rnd(i) < 0.75 * p; const fade = gone ? 0 : 1;
+      if (!fade) continue;
+      c.fillStyle = TH.press; c.beginPath();
+      c.arc(lerp(L + 30, R - 30, rnd(i + 7)), lerp(top + 10, G - 10, rnd(i + 31)), 5, 0, Math.PI * 2); c.fill();
+    }
+    car(c, x, G, s);
+    // skirts
+    c.fillStyle = TH.ink; c.fillRect(L - 4, top - 4, 10, G - top + 4); c.fillRect(R - 6, top - 4, 10, G - top + 4);
+    // fans
+    for (const fx of [x - 30 * s, x + 30 * s]) {
+      const fy = top + 4, ang = t * 10 * (t > 0.8 ? 1 : 0);
+      c.save(); c.translate(fx, fy - 2);
+      c.fillStyle = TH.paper; c.strokeStyle = TH.ink; c.lineWidth = 3;
+      c.beginPath(); c.arc(0, 0, 26, 0, Math.PI * 2); c.fill(); c.stroke();
+      c.rotate(ang); c.fillStyle = TH.ink;
+      for (let b = 0; b < 3; b++) { c.rotate(Math.PI * 2 / 3); c.beginPath(); c.ellipse(12, 0, 12, 5, 0, 0, Math.PI * 2); c.fill(); }
+      c.restore();
+    }
+    // atmosphere pushes on the roof (constant), pressure underneath shrinks
+    for (const xl of [-110, -55, 0, 55, 110]) {
+      const ax = x + xl * s, ay = G - roofAt(xl) * s - 8;
+      arrow(c, ax, ay - 70, ax, ay, TH.press);
+    }
+    for (const xl of [-110, -20, 110]) {
+      const ax = x + xl * s, len = 54 * (1 - 0.8 * p);
+      arrow(c, ax, G - 4, ax, G - 4 - len, TH.press, TH.arrow * 0.7);
+    }
+    label(c, get("s5.outside"), x - 150 * s, 26, TH.press);
+    label(c, get("s5.inside"), x - 146 * s, G + 40, TH.press);
+    label(c, get("s5.fan"), x + 30 * s, G + 40, TH.ink, "center");
+  },
+  hang(c, t, W, H, st) {
+    const CEIL = 96, s = 1.5, x = 520;
+    const F = st.v * AREA, stick = F >= WEIGHT;
+    st.drop = lerp(st.drop ?? 0, stick ? 0 : 1, REDUCED ? 1 : 0.1);
+    // ceiling (top of the ramp)
+    c.fillStyle = TH.groundFill; c.fillRect(0, 0, W, CEIL);
+    c.strokeStyle = TH.groundLine; c.lineWidth = TH.brut ? 4 : 2; c.beginPath(); c.moveTo(0, CEIL); c.lineTo(W, CEIL); c.stroke();
+    const y = CEIL + st.drop * 190, rot = Math.PI + st.drop * 0.18;
+    car(c, x, y, s, rot);
+    const ax = x + 320, P = CEIL + 200, fl = Math.min(P - CEIL - 12, F * 4.2);
+    arrow(c, ax, P, ax, P - fl, TH.press);
+    label(c, `${get("s6.force")} ${F.toFixed(1)} kN`, ax + 26, P - Math.max(20, fl - 12), TH.press);
+    arrow(c, ax, P, ax, P + WEIGHT * 4.2, TH.grav);
+    label(c, `${get("s6.down")} ${WEIGHT} kN`, ax + 26, P + WEIGHT * 4.2 - 12, TH.grav);
+  },
+  sum(c, t, W, H) {
+    // left: jet car on the road
+    ground(c, 300, W / 2 - 40);
+    car(c, 360, 300, 1.15);
+    jets(c, 360 - 150 * 1.15, 300 - 48, 150, [-1, 0], 1);
+    arrow(c, 300, 130, 500, 130, TH.thrust); label(c, get("s7.up"), 520, 130, TH.thrust);
+    // right: car hanging under the ceiling
+    c.save(); c.translate(W / 2 + 40, 0);
+    c.fillStyle = TH.groundFill; c.fillRect(0, 0, W / 2 - 40, 70);
+    c.strokeStyle = TH.groundLine; c.lineWidth = TH.brut ? 4 : 2; c.beginPath(); c.moveTo(0, 70); c.lineTo(W / 2 - 40, 70); c.stroke();
+    car(c, 300, 70, 1.15, Math.PI);
+    for (const dx of [-80, 0, 80]) arrow(c, 300 + dx, 290, 300 + dx, 200, TH.press);
+    label(c, get("s7.press"), 420, 260, TH.press);
+    c.restore();
+  }
+};
+
+/* ---------- canvas setup ---------- */
+const slides = [...document.querySelectorAll(".slide")];
+const canv = [...document.querySelectorAll("canvas")].map((el) => ({
+  el, c: el.getContext("2d"), fn: DRAW[el.dataset.draw], W: +el.dataset.w, H: +el.dataset.h,
+  dur: +(el.dataset.dur || 0), slide: slides.indexOf(el.closest(".slide")), st: {}, start: 0
+}));
+function sizeAll() {
+  for (const o of canv) {
+    const cw = o.el.clientWidth || 1408, ch = o.el.clientHeight || o.H;
+    o.el.width = cw * DPR; o.el.height = ch * DPR;
+    o.k = Math.min(cw / o.W, ch / o.H); o.ox = (cw - o.W * o.k) / 2; o.oy = (ch - o.H * o.k) / 2;
+  }
+}
+function paint(o, t) {
+  const c = o.c; c.setTransform(1, 0, 0, 1, 0, 0);
+  c.fillStyle = TH.canvasBg; c.fillRect(0, 0, o.el.width, o.el.height);
+  c.setTransform(DPR * o.k, 0, 0, DPR * o.k, DPR * o.ox, DPR * o.oy);
+  c.globalAlpha = 1; c.textAlign = "left";
+  o.fn(c, t, o.W, o.H, o.st);
+}
+
+/* sliders */
+function bindSlider(cls, slideIdx, fmt, test) {
+  const inp = document.querySelector(cls), out = inp.nextElementSibling, state = inp.closest(".ctrl").querySelector(".state");
+  const o = canv.find((x) => x.slide === slideIdx);
+  const upd = () => {
+    o.st.v = +inp.value; out.textContent = fmt(o.st.v);
+    const ok = test(o.st.v); state.textContent = ok[0]; state.dataset.ok = ok[1];
+  };
+  inp.addEventListener("input", upd); upd();
+}
+bindSlider(".thrust-range", 2, (v) => `${v.toFixed(1)} kN`, (v) => v > WEIGHT ? [S.s3.on, 1] : [S.s3.off, 0]);
+bindSlider(".press-range", 5, (v) => `${v.toFixed(1)} kPa`, (v) => v * AREA >= WEIGHT ? [S.s6.stick, 1] : [S.s6.fall, 0]);
+
+/* ---------- navigation ---------- */
+const dots = document.getElementById("dots"), foot = document.getElementById("foot");
+slides.forEach((_, i) => {
+  const b = document.createElement("button"); b.setAttribute("aria-label", `${i + 1}`);
+  b.innerHTML = "<span></span>"; b.onclick = () => go(i); dots.appendChild(b);
+});
+let cur = -1, seek = null;
+function go(i) {
+  i = clamp(i, 0, slides.length - 1); if (i === cur) return;
+  slides.forEach((s, j) => s.classList.toggle("on", j === i));
+  [...dots.children].forEach((d, j) => d.toggleAttribute("aria-current", j === i));
+  cur = i; const now = performance.now();
+  canv.forEach((o) => { if (o.slide === i) o.start = now; });
+  foot.textContent = `${S.ui.chapters[+slides[i].dataset.ch]}  ·  ${i + 1} / ${slides.length}`;
+  history.replaceState(null, "", "#" + (i + 1));
+  const other = document.getElementById("other");
+  other.href = `${OTHER}?lang=${LANG}#${i + 1}`;
+}
+document.querySelectorAll(".replay").forEach((b) => b.onclick = () => {
+  const o = canv.find((x) => x.slide === cur); if (o) o.start = performance.now();
+});
+let lock = 0;
+addEventListener("wheel", (e) => {
+  if (e.target.closest && e.target.closest("input")) return;
+  const now = Date.now(); if (now < lock || Math.abs(e.deltaY) < 8) return;
+  lock = now + 850; go(cur + (e.deltaY > 0 ? 1 : -1));
+}, { passive: true });
+addEventListener("keydown", (e) => {
+  if (e.target.tagName === "INPUT" && (e.key === "ArrowLeft" || e.key === "ArrowRight")) return;
+  const k = e.key;
+  if (["ArrowDown", "ArrowRight", "PageDown", " "].includes(k)) { e.preventDefault(); go(cur + 1); }
+  else if (["ArrowUp", "ArrowLeft", "PageUp"].includes(k)) { e.preventDefault(); go(cur - 1); }
+  else if (k === "Home") go(0); else if (k === "End") go(slides.length - 1);
+});
+let tx = null;
+addEventListener("touchstart", (e) => { tx = e.target.closest("input") ? null : [e.touches[0].clientX, e.touches[0].clientY]; }, { passive: true });
+addEventListener("touchend", (e) => {
+  if (!tx) return; const dx = e.changedTouches[0].clientX - tx[0], dy = e.changedTouches[0].clientY - tx[1];
+  const d = Math.abs(dx) > Math.abs(dy) ? dx : dy; if (Math.abs(d) > 40) go(cur + (d < 0 ? 1 : -1)); tx = null;
+}, { passive: true });
+
+/* for screenshot checks: __seek(pageIndex, seconds) */
+window.__seek = (i, t) => { go(i); seek = t; };
+
+function frame(now) {
+  for (const o of canv) {
+    if (o.slide !== cur) continue;
+    let t = (now - o.start) / 1000;
+    if (o.dur) t = REDUCED ? o.dur : Math.min(t, o.dur);
+    if (seek !== null) t = seek;
+    paint(o, t);
+  }
+  requestAnimationFrame(frame);
+}
+sizeAll();
+canv.forEach((o) => paint(o, o.dur || 0));
+go(clamp((parseInt(location.hash.slice(1)) || 1) - 1, 0, slides.length - 1));
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
