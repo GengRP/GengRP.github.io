@@ -34,7 +34,7 @@ const { Content } = await render(post);
       <h1 class="display mt-3 text-4xl sm:text-5xl">{post.data.title}</h1>
       <p class="mt-5 text-xl leading-relaxed text-muted">{post.data.summary}</p>
     </header>
-    <div class="prose">
+    <div class="prose" data-copy={t.writing.copy} data-copied={t.writing.copied}>
       <Content />
     </div>
     {
@@ -51,3 +51,30 @@ const { Content } = await render(post);
     }
   </article>
 </Base>
+
+<script>
+  // Copy button on every code block in an article.
+  for (const body of document.querySelectorAll<HTMLElement>('.prose[data-copy]')) {
+    const { copy = 'Copy', copied = 'Copied' } = body.dataset;
+    for (const pre of body.querySelectorAll('pre')) {
+      const wrap = document.createElement('div');
+      wrap.className = 'code-wrap';
+      pre.before(wrap);
+      wrap.append(pre);
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'copy-btn';
+      btn.textContent = copy;
+      btn.addEventListener('click', async () => {
+        await navigator.clipboard.writeText(pre.innerText.trimEnd());
+        btn.textContent = copied;
+        btn.dataset.done = '';
+        setTimeout(() => {
+          btn.textContent = copy;
+          delete btn.dataset.done;
+        }, 1800);
+      });
+      wrap.append(btn);
+    }
+  }
+</script>

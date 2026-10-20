@@ -10,6 +10,32 @@ This post writes down the whole process, including the "style" step I added afte
 
 I turned the example in this post into a Neo-Brutalist sample deck. Have a look first: [sample deck](https://gengrp.github.io/demos/roadster/neo.html?lang=en) (switch between English, Japanese and Chinese at the top right).
 
+## The short version: hand this to your agent
+
+If you don't have time to read it all, press "Copy" at the top right of the box below and paste it into your AI (Claude or ChatGPT both work). Replace what's in braces with your own details and it will follow the process from this post step by step.
+
+```
+Please make me a web lesson that looks like a polished slide deck, following the process below.
+
+Topic: {your topic, e.g. "How the Tesla Roadster flies, and how it hangs upside down"}
+Readers: {who will read it, what they already know, what they should be able to do afterwards}
+Style: {e.g. "Neo-Brutalist" or "an Apple keynote"; if I haven't decided, suggest 2–3 for me to choose from}
+
+Process (stop after each step and wait for my OK before going on):
+1. Write only the script first, in Markdown, one point per section. Give sources for facts and numbers, and keep what has been confirmed separate from what has only been claimed.
+2. Turn the script into a storyboard table: page | the page's point in one sentence | picture | what the animation explains ("none" if there isn't one). One point per page.
+3. After I approve the storyboard, build the pages:
+   - A single HTML file with no external resources; it must open offline
+   - 16:9, centred and scaled; scroll wheel, arrow keys and space turn pages, one page per scroll; chapter name and page number at the bottom
+   - Pages that explain how something works get a canvas animation that answers one "why": 3–6 seconds, plays once and stops, with a replay button. Where numbers are related, add one draggable slider
+   - State the style's reference, exact colour codes and fonts; at most 3 accent colours, and each colour keeps one meaning throughout
+   - Avoid: a cover with a big centred headline and two buttons, three equal cards side by side, blue-purple gradients, glowing orbs, particles, blur-in effects, elements flying in one by one, emoji as icons, boxes inside boxes
+   - Body text at least 18px, captions at least 13px
+4. When done, screenshot every page (three shots for animated pages: start, middle, end), check for overlapping or overflowing text and text that's too small, and fix it before handing it over. If you can't run code or take screenshots, give me the complete HTML file and remind me to check each page myself.
+```
+
+The rest of this post explains the whole process and why each step matters.
+
 ## Why a web page instead of PowerPoint
 
 Almost anything PowerPoint can do, a web page can do too. A web page adds three things:

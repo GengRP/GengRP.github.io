@@ -216,6 +216,43 @@
     white-space: pre-wrap;
     overflow-wrap: anywhere;
   }
+  .prose .code-wrap {
+    position: relative;
+  }
+  .prose .code-wrap pre {
+    padding-top: 3em;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 0.55rem;
+    right: 0.6rem;
+    min-height: 32px;
+    padding: 0 0.85rem;
+    border-radius: 8px;
+    border: 1px solid rgb(255 255 255 / 0.22);
+    background: rgb(255 255 255 / 0.1);
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .copy-btn:hover {
+    background: rgb(255 255 255 / 0.2);
+  }
+  .copy-btn:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  .copy-btn[data-done] {
+    background: rgb(255 255 255 / 0.9);
+    color: #000;
+  }
+  @media (pointer: coarse) {
+    .copy-btn {
+      min-height: 44px;
+    }
+  }
   .prose h3 {
     font-size: 1.2rem;
     font-weight: 700;
