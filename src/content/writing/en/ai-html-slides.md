@@ -54,21 +54,18 @@ The cost is that editing is less convenient than PowerPoint: you can't drag text
 
 ## The three things that matter most
 
-**1. Write the script first, build pages later.**
-
+### 1. Write the script first, build pages later
 If you start with "make me a lesson on how the Tesla Roadster works", the AI thinks about content and layout at the same time, and every page ends up stuffed with text. It looks like a Word document with a new background.
 
-The right order: have the AI write a script (text only), read it and fix it yourself; then split the script into a storyboard where each page has one point and one picture; only then have it build the pages. With content and layout kept apart, changing one sentence won't break the layout of a page.
+The right order: <mark>have the AI write a script (text only), read it and fix it yourself; then split the script into a storyboard where each page has one point and one picture; only then have it build the pages.</mark> With content and layout kept apart, changing one sentence won't break the layout of a page.
 
-**2. Animations explain how things work. They are not decoration.**
-
-Every animation should answer one "why". Why does blowing gas lift the car? Why doesn't it fall when it's upside down? Those are good animations. Titles flying in and cards popping up one by one are not. They only distract.
+### 2. Animations explain how things work. They are not decoration
+<mark>Every animation should answer one "why".</mark> Why does blowing gas lift the car? Why doesn't it fall when it's upside down? Those are good animations. Titles flying in and cards popping up one by one are not. They only distract.
 
 Keep animations to 3 to 6 seconds. Play once when the page opens, then stop, with a replay button next to it. Where there's a relationship between numbers (angle, distance, speed), make it a slider and let the reader drag it.
 
-**3. Name the style, and say what you don't want.**
-
-This is where my first attempt fell short. Without a named style, the AI gives you "average taste": white background, blue buttons, rounded cards, the look you've seen everywhere.
+### 3. Name the style, and say what you don't want
+This is where my first attempt fell short. <mark>Without a named style, the AI gives you "average taste"</mark>: white background, blue buttons, rounded cards, the look you've seen everywhere.
 
 For something with character, put four things in the prompt:
 
@@ -77,14 +74,13 @@ For something with character, put four things in the prompt:
 - **Fonts**: what to use for headings and for body text
 - **A list of what to avoid**: blue-purple gradients, three equal cards side by side, emoji used as icons, and so on
 
-The last one is the easiest to forget and the most effective. The AI's average taste is made of exactly these common elements. Rule them out one by one and what remains is the style you asked for.
+> **Key point**: The last one is the easiest to forget and the most effective. The AI's average taste is made of exactly these common elements. Rule them out one by one and what remains is the style you asked for.
 
 ## Step by step: "How the Tesla Roadster flies, and how it hangs upside down on a wall"
 
 On October 15, Tesla unveiled its new Roadster and showed two things on stage: the car jumping and rolling in the air on gas jets, and the car driving up a curved ramp and stopping upside down at the top. Each comes down to one piece of school physics, which makes them perfect for explainer animations.
 
-**Step 1: Write the script**
-
+### Step 1: Write the script
 Tell the AI:
 
 ```
@@ -95,8 +91,7 @@ Keep a clear line between what was actually shown at the event and numbers that 
 
 Read the script yourself when you get it. Trending topics need extra checking: go by official announcements and reliable reporting, because what the AI remembers may be out of date or even made up. In this example, the "flying" was really a few seconds of jumping and rolling, not sustained flight, and the 4,700 kg of suction is Tesla's own figure, which some reviewers think is too high. Get these right in the script. Fixing them after they're animated is a pain.
 
-**Step 2: Turn it into a storyboard**
-
+### Step 2: Turn it into a storyboard
 ```
 Turn the script into a storyboard table, one row per page: page | the page's point in one sentence | picture | what the animation explains ("none" if there isn't one)
 ```
@@ -113,17 +108,15 @@ For this example it comes out roughly like this:
 | 6 | If pressure gap × floor area beats the weight, it can hang upside down | The car upside down, pressure and gravity arrows | Drag a slider to change the pressure under the car and see whether it falls or sticks at the top |
 | 7 | Summary: one pushes out, the other presses in | Two small diagrams side by side | None |
 
-When you look at this table, ask yourself only one thing: does each page have exactly one point? If a page tries to say two things, split it into two pages.
+> **Check**: When you look at this table, ask yourself only one thing: does each page have exactly one point? If a page tries to say two things, split it into two pages.
 
-**Step 3: Pick a style**
-
+### Step 3: Pick a style
 If you're not sure which style to use, browse the design styles page on VibeHub (vibe-hub.org). It collects 24 styles, each with a description and examples. Here are two:
 
 - **Apple style**: black or light grey background, one sentence and one big picture per page, lots of space. Good for explaining how things work and for concepts.
 - **Neo-Brutalist**: off-white background, thick black outlines, bright blocks of colour, hard shadows. Good when you want something eye-catching and a bit playful.
 
-**Step 4: Generate it with the full prompt**
-
+### Step 4: Generate it with the full prompt
 Once the storyboard is settled, use the template below. Its four parts are inputs, style direction, structure and build requirements. This way of splitting a prompt comes from the best-performing animation prompts on Prompt Motion (prompt-motion.com). Replace what's in braces with your own content. Anything you leave out, the AI fills with defaults.
 
 ```
@@ -167,8 +160,7 @@ Follow the storyboard, one section per page.
 
 For the two styles, you can swap these in for the `<direction>` part above:
 
-**Apple style**
-
+#### Apple style
 ```
 Reference: Apple keynotes and apple.com product pages
 Canvas: #000000 or #F5F5F7; body text #1D1D1F (light background) / #F5F5F7 (dark background); only 1 accent colour
@@ -178,8 +170,7 @@ Animation: easing that starts slow and stops quickly; only one thing moves at a 
 Avoid: as above; frosted glass only for overlays, gradients only on the one key word
 ```
 
-**Neo-Brutalist**
-
+#### Neo-Brutalist
 ```
 Reference: Neo-Brutalist indie product sites and event pages
 Canvas: off-white like #FFF8E7; thick 3px black outlines; hard solid black shadows with no blur (6px offset)
@@ -190,8 +181,7 @@ Animation: crisp moves and press-down effects; no soft fades
 Avoid: as above; decoration must never outshine the content; no more than 3 loud colours overall
 ```
 
-**What it looks like**
-
+#### What it looks like
 Following the prompt above, I built it with the Neo-Brutalist `<direction>`: [open the sample deck](https://gengrp.github.io/demos/roadster/neo.html?lang=en). Off-white background, thick black outlines, hard shadows, sticker-style labels.
 
 ![Drag the slider, and the car lifts off once thrust exceeds its weight](/demos/roadster/shots/neo-lift-en.jpg)
@@ -200,9 +190,8 @@ Following the prompt above, I built it with the Neo-Brutalist `<direction>`: [op
 
 Each colour keeps one meaning throughout: thrust is always red, air pressure always teal, gravity always black. Pages 3 and 6 have sliders, and the animations on pages 2, 4 and 5 can be replayed. They look best on a computer; on a phone, turn it sideways.
 
-**Step 5: Check every page**
-
-Always look at every page the AI built yourself. Don't stop at the AI saying "done". Common problems: text overlapping a picture, labels sitting on top of lines, an animation's last frame not stopping in the right place, text too small to read. When a page has a problem, paste a screenshot of it straight into the chat and say which page, which element, and what it should look like, for example "On page 5, the 'Outside: normal air pressure' label covers the car body. Move it above the roof." Fix one thing at a time and look again after each fix. Ask for several fixes at once and one fix often breaks something else.
+### Step 5: Check every page
+Always look at every page the AI built yourself. Don't stop at the AI saying "done". Common problems: text overlapping a picture, labels sitting on top of lines, an animation's last frame not stopping in the right place, text too small to read. When a page has a problem, paste a screenshot of it straight into the chat and say which page, which element, and what it should look like, for example "On page 5, the 'Outside: normal air pressure' label covers the car body. Move it above the roof." <mark>Fix one thing at a time and look again after each fix.</mark> Ask for several fixes at once and one fix often breaks something else.
 
 If you use an agent that can run code itself (such as Claude Code), add one line at the end of the prompt: "When you're done, screenshot every page, and take three shots of each animated page (start, middle, end). Check for overlapping or overflowing text yourself and fix it before handing it to me." It checks its own work first, and you'll find far fewer problems.
 
@@ -230,7 +219,7 @@ If you use an agent that can run code itself (such as Claude Code), add one line
 
 ## Finally
 
-The slowest part of this process is the first two steps: writing the script and splitting it into a storyboard. Generating the pages is actually quick. If you just want to try it, take the prompt template above, pick a topic you know well, and build 5 pages to see how it turns out.
+<mark>The slowest part of this process is the first two steps: writing the script and splitting it into a storyboard.</mark> Generating the pages is actually quick. If you just want to try it, take the prompt template above, pick a topic you know well, and build 5 pages to see how it turns out.
 
 Sources used in this post:
 - VibeHub design styles: vibe-hub.org

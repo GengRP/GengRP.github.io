@@ -253,13 +253,79 @@
       min-height: 44px;
     }
   }
+  /* Numbered sections with a divider, so long articles read in clear chunks. */
+  .prose {
+    counter-reset: section;
+  }
+  .prose h2 {
+    counter-increment: section;
+    border-top: 1px solid var(--color-rule);
+    padding-top: 1.6em;
+    margin-top: 2.6em;
+  }
+  .prose h2::before {
+    content: counter(section, decimal-leading-zero);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--color-accent);
+    margin-bottom: 0.35em;
+  }
   .prose h3 {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    margin-top: 1.8em;
+    line-height: 1.45;
+    color: var(--color-accent);
+    margin-top: 2em;
+  }
+  .prose h4 {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    margin-top: 1.6em;
   }
   .prose strong {
     font-weight: 650;
+    background: linear-gradient(transparent 62%, #ffe68a 62%);
+    padding: 0 0.1em;
+  }
+  .prose mark {
+    background: #fff1b8;
+    color: inherit;
+    padding: 0.1em 0.2em;
+    border-radius: 4px;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .prose ul > li::marker {
+    color: var(--color-accent);
+  }
+  .prose ol > li::marker {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+  .prose li + li {
+    margin-top: 0.35em;
+  }
+  .prose blockquote {
+    border-left: 0;
+    background: var(--color-accent-soft);
+    color: var(--color-ink);
+    border-radius: 14px;
+    padding: 0.9em 1.2em;
+  }
+  .prose blockquote strong {
+    background: none;
+    color: var(--color-accent);
+  }
+  .prose hr {
+    border: 0;
+    border-top: 1px solid var(--color-rule);
+    margin: 2.6em 0;
+  }
+  .prose thead th {
+    background: var(--color-shade);
   }
   .prose img {
     width: 100%;
