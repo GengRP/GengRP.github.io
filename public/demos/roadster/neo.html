@@ -67,7 +67,6 @@ h1 { word-break: auto-phrase; font-size: 60px; font-weight: 900; letter-spacing:
 
 <div id="top">
   <nav class="seg" aria-label="language"><a data-lang="zh">中文</a><a data-lang="ja">日本語</a><a data-lang="en">EN</a></nav>
-  <a id="other" class="btn" data-t="ui.other"></a>
 </div>
 
 <section class="slide cover" data-ch="0">
@@ -458,7 +457,7 @@ function go(i) {
   foot.textContent = `${S.ui.chapters[+slides[i].dataset.ch]}  ·  ${i + 1} / ${slides.length}`;
   history.replaceState(null, "", "#" + (i + 1));
   const other = document.getElementById("other");
-  other.href = `${OTHER}?lang=${LANG}#${i + 1}`;
+  if (other) other.href = `${OTHER}?lang=${LANG}#${i + 1}`;
 }
 document.querySelectorAll(".replay").forEach((b) => b.onclick = () => {
   const o = canv.find((x) => x.slide === cur); if (o) o.start = performance.now();

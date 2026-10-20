@@ -8,7 +8,7 @@ A few days ago I had AI build a 26-page slide-style lesson as a web page. You tu
 
 This post writes down the whole process, including the "style" step I added afterwards. You don't need to code. If you can chat with ChatGPT or Claude, you can follow along.
 
-I turned the example in this post into two sample decks using the same prompt. Have a look first: [Apple style](https://gengrp.github.io/demos/roadster/apple.html?lang=en) / [Neo-Brutalist](https://gengrp.github.io/demos/roadster/neo.html?lang=en) (switch between English, Japanese and Chinese at the top right).
+I turned the example in this post into a Neo-Brutalist sample deck. Have a look first: [sample deck](https://gengrp.github.io/demos/roadster/neo.html?lang=en) (switch between English, Japanese and Chinese at the top right).
 
 ## Why a web page instead of PowerPoint
 
@@ -166,16 +166,13 @@ Avoid: as above; decoration must never outshine the content; no more than 3 loud
 
 **What it looks like**
 
-Following the prompt above, I built two versions from the same script. The content is identical; only `<direction>` changed.
+Following the prompt above, I built it with the Neo-Brutalist `<direction>`: [open the sample deck](https://gengrp.github.io/demos/roadster/neo.html?lang=en). Off-white background, thick black outlines, hard shadows, sticker-style labels.
 
-- [Apple style](https://gengrp.github.io/demos/roadster/apple.html?lang=en): black background, one sentence per page, and only two accent colours: orange (thrust) and blue (air pressure).
-- [Neo-Brutalist](https://gengrp.github.io/demos/roadster/neo.html?lang=en): off-white background, thick black outlines, hard shadows, sticker-style labels.
+![Drag the slider, and the car lifts off once thrust exceeds its weight](/demos/roadster/shots/neo-lift-en.jpg)
 
-![Apple style: drag the slider, and the car lifts off once thrust exceeds its weight](/demos/roadster/shots/apple-lift-en.jpg)
+![Fans pump the air from under the car, and the atmosphere holds it on the road](/demos/roadster/shots/neo-suction-en.jpg)
 
-![Neo-Brutalist: fans pump the air from under the car, and the atmosphere holds it on the road](/demos/roadster/shots/neo-suction-en.jpg)
-
-Both use colours the same way: thrust is always a warm colour, air pressure always blue or teal, gravity always grey or black. Pages 3 and 6 have sliders, and the animations on pages 2, 4 and 5 can be replayed. They look best on a computer; on a phone, turn it sideways.
+Each colour keeps one meaning throughout: thrust is always red, air pressure always teal, gravity always black. Pages 3 and 6 have sliders, and the animations on pages 2, 4 and 5 can be replayed. They look best on a computer; on a phone, turn it sideways.
 
 **Step 5: Check every page**
 
@@ -185,7 +182,7 @@ If you use an agent that can run code itself (such as Claude Code), add one line
 
 ## Common pitfalls
 
-- **Give each colour one fixed meaning.** In this example the thrust arrow is always orange, gravity is always grey and air pressure is always blue. Keep it that way all the way through, and readers know what a colour means at a glance.
+- **Give each colour one fixed meaning.** In this example the thrust arrow is always red, gravity is always black and air pressure is always teal. Keep it that way all the way through, and readers know what a colour means at a glance.
 - **One scroll skips several pages.** A single swipe on a laptop trackpad fires many page turns. Writing "one scroll must not skip several pages" in the prompt prevents it.
 - **Text keeps getting smaller.** To fit everything on a page, the AI quietly shrinks the font. So state a minimum font size.
 - **Animations that loop forever.** Constant looping is distracting. Write "plays once and stops, can be replayed".
