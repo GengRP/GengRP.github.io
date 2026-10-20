@@ -1,8 +1,10 @@
 ---
 title: Getting AI to build web lessons that look like a polished slide deck
-summary: Write the script first, then a storyboard. Name a style and list what to avoid. Includes a ready-to-use prompt and two sample decks built from it.
+summary: Write the script first, then a storyboard. Name a style and list what to avoid. Includes a ready-to-use prompt, a sample deck and a slide version.
 date: 2026-10-20
 ---
+
+> **Slide version**: the same content as a 16-page deck. See the result on the left, copy the prompt on the right with one click. [Open the slide version →](/slides/ai-html-slides/en.html)
 
 A few days ago I had AI build a 26-page slide-style lesson as a web page. You turn pages with the scroll wheel or arrow keys, pages that explain how something works have animations, and one page has a slider you can drag to see how the numbers change. I was happy with the features and the finish, but the look was ordinary: clean, nothing broken, nothing memorable either.
 
