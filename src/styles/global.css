@@ -359,6 +359,13 @@
     border-radius: 14px;
     box-shadow: 0 2px 18px rgb(0 0 0 / 0.08);
   }
+  /* Image caption: an italic-only paragraph right after an image. */
+  .prose p:has(> img) + p:has(> em:only-child) {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-muted);
+  }
+  .prose p:has(> img) + p > em:only-child { font-style: normal; }
   .prose table {
     display: block;
     overflow-x: auto;
