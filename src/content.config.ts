@@ -14,6 +14,8 @@ const writing = defineCollection({
     date: z.coerce.date(),
     /** Where this article was also posted (syndication links). */
     syndication: z.array(z.object({ label: z.string(), href: z.string() })).default([]),
+    /** Optional slide-deck version; when set, article lists link here instead. */
+    deck: z.string().optional(),
     draft: z.boolean().default(false),
   }),
 });

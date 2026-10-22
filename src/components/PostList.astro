@@ -1,21 +1,23 @@
 ---
-import { path, formatDate, type Lang } from '../i18n/ui';
+import { ui, path, formatDate, type Lang } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
-  posts: { slug: string; data: { title: string; summary: string; date: Date } }[];
+  posts: { slug: string; data: { title: string; summary: string; date: Date; deck?: string } }[];
 }
 const { lang, posts } = Astro.props;
+const t = ui[lang];
 ---
 
 <ul class="grid gap-5">
   {
     posts.map((p) => (
       <li>
-        <a href={path(lang, `writing/${p.slug}`)} class="card group block cursor-pointer p-6 sm:p-8">
+        <a href={p.data.deck ?? path(lang, `writing/${p.slug}`)} class="card group block cursor-pointer p-6 sm:p-8">
           <time datetime={p.data.date.toISOString()} class="text-[0.8125rem] text-muted">
             {formatDate(p.data.date, lang)}
           </time>
+          {p.data.deck && <span class="ml-2 rounded-full bg-shade px-2.5 py-0.5 text-xs font-medium text-muted">{t.writing.deck}</span>}
           <h3 class="mt-2 font-display text-2xl leading-snug font-bold tracking-tight text-ink transition-colors duration-200 group-hover:text-accent">
             {p.data.title}
           </h3>

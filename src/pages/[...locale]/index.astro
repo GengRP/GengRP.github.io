@@ -18,22 +18,9 @@ const { profile } = site;
 ---
 
 <Base lang={lang} description={profile.tagline[lang]}>
-  <!-- Hero: one message, one action. -->
-  <section class="wrap pt-20 pb-20 text-center sm:pt-32 sm:pb-28">
-    <p class="text-lg font-semibold sm:text-xl"><span class="gradient-text">KOUHEI AI</span></p>
-    <h1 class="display mx-auto mt-4 max-w-4xl text-[2.75rem] sm:text-7xl">{profile.tagline[lang]}</h1>
-    <p class="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">{profile.intro[lang]}</p>
-    <div class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-      <a href={DAILY_PATH[lang]} class="pill">{t.home.dailyCta}</a>
-      <a href={path(lang, 'posts')} class="tap text-[0.9375rem] text-accent hover:underline underline-offset-4">
-        {t.home.allPosts} <span aria-hidden="true">›</span>
-      </a>
-    </div>
-  </section>
-
   {
     posts.length > 0 && (
-      <section class="band band-shade">
+      <section class="band pt-12 sm:pt-16">
         <div class="wrap-narrow">
           <SectionHead title={t.home.latest} href={path(lang, 'writing')} linkLabel={t.home.allWriting} />
           <PostList lang={lang} posts={posts} />
