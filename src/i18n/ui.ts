@@ -11,6 +11,13 @@ export const HTML_LANG: Record<Lang, string> = { zh: 'zh-CN', ja: 'ja', en: 'en'
 export const LANG_LABEL: Record<Lang, string> = { zh: '中', ja: '日', en: 'EN' };
 
 /** ai-daily uses its own language folder names. */
+/** Redirects to the newest edition (written by the ai-daily deploy workflow). */
+export const DAILY_LATEST: Record<Lang, string> = {
+  zh: '/ai-daily/cn/latest/',
+  ja: '/ai-daily/jp/latest/',
+  en: '/ai-daily/en/latest/',
+};
+
 export const DAILY_PATH: Record<Lang, string> = {
   zh: '/ai-daily/cn/',
   ja: '/ai-daily/jp/',
@@ -25,7 +32,7 @@ export const ui = {
       latestPosts: '最新动态',
       allPosts: '全部动态',
       daily: 'AI 日报',
-      dailyLead: '每天早上更新，五条新闻，每条一两句话讲清楚。',
+      dailyLead: '每天早上更新，五六条新闻，每条一两句话讲清楚。',
       dailyCta: '看今天的日报',
       projects: '项目',
       elsewhere: '在别处',
@@ -51,7 +58,7 @@ export const ui = {
       latestPosts: '新着投稿',
       allPosts: '投稿一覧',
       daily: 'AIデイリー',
-      dailyLead: '毎朝更新。ニュース5本を、それぞれ一言二言で。',
+      dailyLead: '毎朝更新。ニュース5〜6本を、それぞれ一言二言で。',
       dailyCta: '今日のデイリーを読む',
       projects: 'プロジェクト',
       elsewhere: 'ほかの場所',
@@ -77,7 +84,7 @@ export const ui = {
       latestPosts: 'Latest posts',
       allPosts: 'All posts',
       daily: 'AI Daily',
-      dailyLead: 'Updated every morning: five news items, a sentence or two each.',
+      dailyLead: 'Updated every morning: five or six news items, a sentence or two each.',
       dailyCta: "Read today's issue",
       projects: 'Projects',
       elsewhere: 'Elsewhere',

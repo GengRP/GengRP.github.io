@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import SectionHead from '../../components/SectionHead.astro';
 import PostList from '../../components/PostList.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
-import { ui, path, localePaths, DAILY_PATH, type Lang } from '../../i18n/ui';
+import { ui, path, localePaths, DAILY_LATEST, type Lang } from '../../i18n/ui';
 import { getPosts, getShortPosts } from '../../i18n/posts';
 import PostFeed from '../../components/PostFeed.astro';
 import site from '../../content/site.json';
@@ -36,19 +36,21 @@ const { profile } = site;
     </div>
   </section>
 
-  <!-- AI daily: the one dark tile on the page. -->
+  <!-- AI daily: a liquid-glass tile over soft color, opens the newest edition. -->
   <section class="band">
     <div class="wrap">
-      <a
-        href={DAILY_PATH[lang]}
-        class="group block cursor-pointer rounded-[2rem] bg-black px-8 py-16 text-center text-white transition-shadow duration-300 hover:shadow-[0_20px_60px_rgb(0_0_0/0.25)] sm:px-16 sm:py-24"
-      >
-        <h2 class="display text-4xl sm:text-6xl"><span class="gradient-text">{t.home.daily}</span></h2>
-        <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white/80 sm:text-xl">{t.home.dailyLead}</p>
-        <p class="mt-8 inline-flex min-h-11 items-center rounded-full bg-white px-6 text-[0.9375rem] font-medium text-ink transition-colors duration-200 group-hover:bg-white/90">
-          {t.home.dailyCta} <span class="ml-1" aria-hidden="true">›</span>
-        </p>
-      </a>
+      <div class="daily-stage relative isolate overflow-hidden rounded-[2.5rem] px-4 py-10 sm:px-10 sm:py-16">
+        <span class="blob blob-a" aria-hidden="true"></span>
+        <span class="blob blob-b" aria-hidden="true"></span>
+        <span class="blob blob-c" aria-hidden="true"></span>
+        <a href={DAILY_LATEST[lang]} class="liquid-glass group mx-auto block max-w-3xl cursor-pointer rounded-[2rem] px-8 py-14 text-center sm:px-16 sm:py-20">
+          <h2 class="display text-4xl text-ink sm:text-6xl">{t.home.daily}</h2>
+          <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-ink/75 sm:text-xl">{t.home.dailyLead}</p>
+          <p class="mt-8 inline-flex min-h-11 items-center rounded-full bg-ink px-6 text-[0.9375rem] font-medium text-white transition-colors duration-200 group-hover:bg-accent">
+            {t.home.dailyCta} <span class="ml-1" aria-hidden="true">›</span>
+          </p>
+        </a>
+      </div>
     </div>
   </section>
 
