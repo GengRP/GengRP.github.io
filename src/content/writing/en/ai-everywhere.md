@@ -12,9 +12,9 @@ Reading back through two weeks of the daily, I noticed that the reason I don't h
 
 Two kinds of stories kept coming up. One was price cuts: Anthropic says the new Haiku 5.5 costs about 75% less on average than the previous version, and Google halved the price of image generation. The other was shrinking: Meta released an 816-billion-parameter model that runs at home on two connected Mac Studios, and a vision model with only 4 billion parameters came out ahead of 44 baseline models across 34 tests.
 
-![Size of recent price cuts over the past two weeks](/writing/ai-everywhere/price-cuts-en.png)
+![What the same work costs now, as a share of the original price](/writing/ai-everywhere/price-now-en.png)
 
-*Chart: compiled from each company's official numbers. Notion's 90% is compared with using a frontier model directly; the others are compared with the previous version.*
+*Chart: compiled from each company's official numbers. Grey is the original price, blue is the price now. Notion is compared with using a frontier model directly; the others with the previous version.*
 
 One is about cloud prices, the other about hardware on your own desk, and they look unrelated. Underneath, though, it's one change: doing the same job takes less and less computation.
 
