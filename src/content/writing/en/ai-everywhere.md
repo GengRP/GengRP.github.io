@@ -2,6 +2,7 @@
 title: "When AI gets cheaper and smaller: what 16 days of news point to"
 summary: Models keep getting stronger while prices keep falling, and big models have started running on desktop computers. Put together, AI will show up in more and more places. Cheaper doesn't mean we spend less, though, and money is no longer the real bottleneck.
 date: 2026-10-22
+draft: true
 ---
 
 Every morning I put together an AI daily. From October 7 to today that's 16 issues and more than 90 news items. Looking back over them, two kinds of stories keep coming up: "the same work just got cheaper" and "this model now runs on your own computer."
