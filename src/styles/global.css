@@ -142,11 +142,10 @@
   }
 
   /* Liquid glass (home AI-daily tile): translucent pane over drifting color. */
-  .daily-stage { background: linear-gradient(135deg, #eef3ff 0%, #f6efff 50%, #fff0f6 100%); }
-  .blob { position: absolute; z-index: -1; border-radius: 9999px; filter: blur(48px); opacity: 0.75; }
-  .blob-a { width: 22rem; height: 22rem; left: -4rem; top: -5rem; background: #5aa2ff; animation: drift 18s ease-in-out infinite alternate; }
-  .blob-b { width: 18rem; height: 18rem; right: -3rem; top: 20%; background: #a77bff; animation: drift 22s ease-in-out infinite alternate-reverse; }
-  .blob-c { width: 20rem; height: 20rem; left: 35%; bottom: -8rem; background: #ff8cc0; animation: drift 26s ease-in-out infinite alternate; }
+  .daily-stage { background-color: var(--color-shade); }
+  .blob { position: absolute; z-index: -1; border-radius: 9999px; filter: blur(56px); opacity: 0.45; }
+  .blob-a { width: 16rem; height: 16rem; left: 18%; top: -4rem; background: #8db8f5; animation: drift 20s ease-in-out infinite alternate; }
+  .blob-b { width: 14rem; height: 14rem; right: 18%; bottom: -5rem; background: #a9c6f2; animation: drift 24s ease-in-out infinite alternate-reverse; }
   @keyframes drift { to { transform: translate(3rem, 2rem) scale(1.1); } }
   .liquid-glass {
     background: rgb(255 255 255 / 0.78);
