@@ -48,10 +48,6 @@ One is Harvey, a legal AI company. According to Bloomberg, its model usage grew 
 
 It reminded me of an old idea in economics. In the 19th century, steam engines kept getting more efficient with coal, yet Britain's total coal use kept rising, because more and more factories could now afford steam engines. AI is repeating the pattern. As the unit price falls, things that never used to be worth handing to AI get handed over too, and the total bill grows.
 
-So for individuals, the skill worth building is something else: judging what to hand over, and checking whether what comes back is right.
-
-At the bottom of every page of my daily there's a line: "Compiled by an AI assistant from public AI news roundups; original articles are not individually verified. For reference only." AI can read dozens of articles a day. But which ones to go back and check, which numbers are safe to quote, is still for a person to decide. The cheaper AI gets and the more it does, the more places there are where someone has to look, judge and take responsibility. That cost never shows up on the bill. We pay it with our attention.
-
 Once AI is too cheap to think about, what we save is the moment of hesitation over whether to use it. What we take on is the responsibility for whether it got things right. The first is getting very cheap. The second doesn't come with a discount yet.
 
 ---
